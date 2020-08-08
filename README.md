@@ -1,2 +1,2 @@
-# wp-less-is-more
+# WP Less is More
 WordPress theme
