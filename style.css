@@ -1,0 +1,299 @@
+/*
+Theme Name: WP Less is More
+Theme URI: https://www.facebook.com/WPSolucje/
+Author: Paweł Nowak
+Author URI: https://www.facebook.com/PawRakiety
+Description: This Theme is designed for business people, who needs stuff like: Landing Pages, Saless Letters, Squeeze Pages and-or ready to Google AdWords theme ONLY because Less is More.
+Version: 1.1.6
+Requires at least: 5.0
+Tested up to: 5.4
+Requires PHP: 7.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wp-less-is-more
+Tags: one-column, custom-menu, custom-background, custom-header, custom-logo, editor-style, footer-widgets, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, blog, e-commerce, entertainment
+Domain Path: /languages
+
+
+ == Copyright & License Notes ==
+
+ WP Less is More WordPress Theme, Copyright 2016-2019 WPSolucje.tk & Paweł Nowak
+ WP Less is More is distributed under the terms of the GNU GPL
+
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+ License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+ In general words, feel free and encouraged to use, modify and redistribute this theme however you like.
+ You may remove any copyright references (unless required by third party components) and crediting is not necessary.
+ The theme is offered free of charge. If someone asked money for it, someone just tricked you.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU General Public License for more details.
+
+ WP Less is More Theme bundles the following third-party resources:
+
+*! screenshot.png
+ * Copyright:   https://stocksnap.io/
+ * @link:       https://stocksnap.io/photo/typewriter-vintage-8E6502A3BC
+ * Author:      Sergey Zolkin
+ * Author URI:  https://stocksnap.io/author/276
+ * License:     CC0
+ * Licence URI: https://stocksnap.io/license
+ *
+
+*! pin.svg and lock.svg
+ * Copyright: Entypo
+ * Author URI: http://www.entypo.com/
+ * Licence: CC-BY-SA 4.0
+ * Licence URI: https://creativecommons.org/licenses/by-sa/4.0/
+
+*! Bootstrap v3.4.1 (http://getbootstrap.com)
+ * (e.g. bootstrap.js, bootstrap.css jumbotron-narrow.css as well as fonts folder)
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * Or: 					http://getbootstrap.com/getting-started/#license-faqs
+ *
+
+*! HTML5 Shiv v3.7.0,
+ * Copyright 2014 Alexander Farkas
+ * Licenses: 	MIT/GPL2
+ * Source: 		https://github.com/aFarkas/html5shiv
+ *
+
+*! Respond.js v1.4.2: min/max-width media query polyfill
+ * Copyright 2013 Scott Jehl
+ * Licensed under https://github.com/scottjehl/Respond/blob/master/LICENSE-MIT
+ *
+
+*! @Wp_Bootstrap_Navwalker class for Custom Navigation Walker
+ * GitHub URI: 	https://github.com/twittem/wp-bootstrap-navwalker
+ * Version: 	2.0.4
+ * Author: 		Edward McIntyre - @twittem
+ * License: 	GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ *
+ **/
+
+footer nav ul li:hover ul{
+display:block;
+margin: 0px !important;
+}
+
+footer nav ul li:hover{
+position: relative;
+}
+.widget-content ul {padding-left: 0}
+footer ul li{
+	list-style: none;
+	text-align: left;
+}
+
+.navbar-default {
+	padding-bottom: 1px;
+}
+
+#masthead { margin-bottom: 1px }
+
+div#comments-list > ul > li > ul {
+    border-bottom: 1px solid #D9EDF7;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+div#comments-list > ul > li.depth-1.parent {
+	border-left: 1px solid #D9EDF7;
+}
+div#comments-list li.this img.avatar  {
+border: 3px solid #D9EDF7;
+}
+
+.top {margin-top: 20px;}
+.clear {clear: both;}
+
+.category a { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+
+.home .thumbnail {
+	border: none;
+}
+
+/* =WordPress Core
+-------------------------------------------------------------- */
+
+.alignnone {
+    margin: 5px 20px 20px 0;
+}
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.wp-caption {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%; /* Image does not overflow the content area */
+    padding: 5px 3px 10px;
+    text-align: center;
+}
+.wp-caption.alignnone {
+    margin: 5px 20px 20px 0;
+}
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+.wp-caption p.wp-caption-text {
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 0 4px 5px;
+}
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
+
+.sticky h3 a{ color: white;}
+.sticky h3 {
+    background-color: #337AB7;
+    padding: 1rem;
+}
+.gallery-caption {}
+.bypostauthor {}
+.size-auto,
+.size-full,
+.size-large,
+.size-medium,
+.size-thumbnail {
+	max-width: 100%;
+	height: auto;
+}
+.gallery:after {content:"";display:table;clear:both;}
+
+img.aligncenter, div.aligncenter, figure.aligncenter, img.wp-post-image {display:block; margin:1em auto;}
+img.alignright, div.alignright, figure.alignright {float:right; margin:1em 0 1em 2em;}
+img.alignleft, div.alignleft, figure.alignleft, img.wp-post-image.attachment-thumb {float:left; margin:1em 1em 2em 0;}
+figure {max-width: 100%; height: auto; margin:1em 0;}
+p img.alignright, p img.alignleft {margin-top:0;}
+
+
+.gallery figure img {max-width:100%; height:auto; margin:0 auto; display:block;}
+.gallery figure {float:left; margin:0 2% 1em 0;}
+.gallery.gallery-columns-1 figure {width:100%; margin:0 0 1em 0; float:none;}
+
+.gallery.gallery-columns-3 figure {width:32%;}
+.gallery.gallery-columns-3 figure:nth-of-type(3n+3) {margin-right:0;}
+.gallery.gallery-columns-3 figure:nth-of-type(3n+4) {clear:left;}
+
+.gallery.gallery-columns-2 figure {width:49%;}
+.gallery.gallery-columns-2 figure:nth-of-type(even) {margin-right:0;}
+.gallery.gallery-columns-2 figure:nth-of-type(odd) {clear:left;}
+
+.gallery.gallery-columns-4 figure {width:23.25%;}
+.gallery.gallery-columns-4 figure:nth-of-type(4n+4) {margin-right:0;}
+.gallery.gallery-columns-4 figure:nth-of-type(4n+5) {clear:left;}
+
+.gallery.gallery-columns-5 figure {width:18%;}
+.gallery.gallery-columns-5 figure:nth-of-type(5n+5) {margin-right:0;}
+.gallery.gallery-columns-5 figure:nth-of-type(5n+6) {clear:left;}
+
+.gallery.gallery-columns-6 figure {width:14.2%;}
+.gallery.gallery-columns-6 figure:nth-of-type(6n+6) {margin-right:0;}
+.gallery.gallery-columns-6 figure:nth-of-type(6n+7) {clear:left;}
+
+.gallery.gallery-columns-7 figure {width:12%;}
+.gallery.gallery-columns-7 figure:nth-of-type(7n+7) {margin-right:0;}
+.gallery.gallery-columns-7 figure:nth-of-type(7n+8) {clear:left;}
+
+.gallery.gallery-columns-8 figure {width:10.2%;}
+.gallery.gallery-columns-8 figure:nth-of-type(8n+8) {margin-right:0;}
+.gallery.gallery-columns-8 figure:nth-of-type(8n+9) {clear:left;}
+
+.gallery.gallery-columns-9 figure {width:8.85%;}
+.gallery.gallery-columns-9 figure:nth-of-type(9n+9) {margin-right:0;}
+.gallery.gallery-columns-9 figure:nth-of-type(9n+10) {clear:left;}
+
+@media (max-width:767px) {
+	img.alignright, div.alignright, figure.alignright, img.alignleft, div.alignleft, figure.alignleft, img.wp-post-image.attachment-thumb {display:block; margin:1em auto; float:none;}
+	.gallery.gallery-columns-4 figure, .gallery.gallery-columns-5 figure, .gallery.gallery-columns-6 figure, .gallery.gallery-columns-7 figure, .gallery.gallery-columns-8 figure, .gallery.gallery-columns-9 figure {width:100%; margin:0 0 1em 0; float:none;}
+}
+.bg-red{background:#d9534f}
+.text-break{-ms-word-wrap: break-word;
+white-space: normal!important;
+word-break: break-all !important;
+word-break: break-word !important;
+overflow-wrap: break-word !important;
+}
+.code {
+	  font-family: Menlo,Monaco,Consolas,"Courier New",monospace
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px
+}
+.mt-3{margin-top: 10px}
