@@ -3,8 +3,8 @@
 
 Summary:           | WP Less is More
 -------------------|----------------
-Editors:           | @mrpauloen
-Contributors:      | @miccweb
+Editors:           | [@mrpauloen](https://profiles.wordpress.org/mrpauloen/)
+Contributors:      | [@miccweb](https://profiles.wordpress.org/miccweb/)
 Requires at least: | 5.0
 Requires PHP:      | 7.0
 Tested up to:      | 5.5
