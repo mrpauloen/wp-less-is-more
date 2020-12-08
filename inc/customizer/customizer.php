@@ -36,7 +36,7 @@ function wp_less_is_more__sanitize_text( $text ){
 
 function wp_less_is_more__sanitize_checkbox( $checked ) {
 	// Boolean check.
-	return ( ( isset( $checked ) && true == $checked ) ? true : false );
+	return isset( $checked ) && true == $checked;
 }
 
 function wp_less_is_more__sanitize_numbers( $number ) {
