@@ -1,8 +1,44 @@
 <?php
 
-/*
- * This is Bootstrap to WordPress theme called: WP Less is More.
+/**
+ * WP Less is More functions and definitions
  *
+ * @package WordPress
+ * @subpackage WP Less is More
+ * @since WP Less is More 1.0
+ */
+
+ /*
+	* Customizer additions.
+	*
+	* @since WP Less is More 1.1.1
+	*/
+
+require trailingslashit( get_template_directory() ) . 'inc/customizer/customizer.php';
+
+ /*
+	* Define Dropdowns Bootstrap Menu **
+	*
+	* ** If you want to have dropdowns, bootstrtap menu, you have to:
+	* 	1) Register Custom Navigation Walker
+	* 	2) Replaces "current-menu-item" with "active"
+	* 	3) Deletes all CSS classes and id's, except for those listed in the @array
+	* 	4) Deletes empty classes and removes the sub menu class
+	*
+	* @since WP Less is More 1.0
+	*/
+
+require trailingslashit( get_template_directory() ) . 'classes/wp-less-is-more-bootstrap-navwalker.php';
+
+/*
+ * Define Custom Comments Walker
+ *
+ * @since WP Less is More 1.1.6
+ **/
+
+require trailingslashit( get_template_directory() ) . 'classes/wp-less-is-more-comments-walker.php';
+
+/**
  * Sets up theme defaults and registers the various WordPress features that
  * WP Less is More supports.
  *
@@ -15,35 +51,6 @@
  *
  * @since WP Less is More 1.0
  */
-
-
- /*
-	* Customizer additions.
-	*
-	* @since WP Less is More 1.1.1
-	*/
-
-require trailingslashit( get_template_directory() ) . 'inc/customizer/customizer.php';
-
- /*
-	* ** Define Dropdowns Bootstrap Menu **
-	*
-	* ** If you want to have dropdowns, bootstrtap menu, you have to:
-	* 	1) Register Custom Navigation Walker
-	* 	2) Replaces "current-menu-item" with "active"
-	* 	3) Deletes all CSS classes and id's, except for those listed in the @array
-	* 	4) Deletes empty classes and removes the sub menu class
-	*
-	* @since WP Less is More 1.0
-	**/
-
-require trailingslashit( get_template_directory() ) . 'classes/wp_less_is_more_bootstrap_navwalker.php';
-
-
-require trailingslashit( get_template_directory() ) . 'classes/wp_less_is_more_comments_walker.php';
-
-
-
 function wp_less_is_more__theme_setup() {
 
 	/*
@@ -100,7 +107,7 @@ function wp_less_is_more__theme_setup() {
 		'w-sidebar-right'		=> __( 'Right Bottom Widget Menu', 			'wp-less-is-more' ),
 		));
 
-	/*
+	/**
 	 * Enable support for Post Thumbnails on posts and pages.
 	 *
 	 * See: https://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
@@ -134,15 +141,18 @@ function wp_less_is_more__theme_setup() {
 }
 add_action( 'after_setup_theme', 'wp_less_is_more__theme_setup' );
 
+/**
+ * Filters
+ */
 
-/** Filters **/
-
-	/*
-	 * Deletes all CSS classes and id's, except for those listed in the array below
-	 **/
-
-function wp_less_is_more__filter__custom_nav_menu( $var ) {
-		return is_array( $var ) ? array_intersect( $var, array(
+/**
+ * Filters the CSS classes applied to a menu item’s list item element.
+ * @param string|array Array of the CSS classes that are applied to the menu item's li element.
+ * @return @array
+ * @since WP Less is More 1.0
+ */
+function wp_less_is_more__filter__custom_nav_menu( $classes ) {
+		return is_array( $classes ) ? array_intersect( $classes, array(
 				//List of allowed menu classes
 				'current-menu-item',
 				'current_page_item',
@@ -155,13 +165,16 @@ function wp_less_is_more__filter__custom_nav_menu( $var ) {
 				)
 		) : '';
 }
+add_filter ( 'nav_menu_css_class',  'wp_less_is_more__filter__custom_nav_menu' );
+add_filter ( 'nav_menu_item_id'	 ,	'wp_less_is_more__filter__custom_nav_menu' );
+add_filter ( 'page_css_class'	 , 	'wp_less_is_more__filter__custom_nav_menu' );
 
-	/*
-	 * Replaces "current-menu-item" with "active" - for bootstrap menu
-	 * @since WP Less is More 1.0
-	 **/
-
-function wp_less_is_more__filter__current_to_active( $text ){
+/**
+ * Replaces "current-menu-item" with "active" - for bootstrap menu
+ *
+ * @since WP Less is More 1.0
+ */
+function wp_less_is_more__filter__current_to_active( $classes ){
 		$replace = array(
 			//List of menu item classes that should be changed to "active"
 			'current-menu-item' 	=> 'active',
@@ -169,98 +182,94 @@ function wp_less_is_more__filter__current_to_active( $text ){
 			'current_page_parent' 	=> 'parent',
 			'current_page_ancestor' => 'ancestor',
 		);
-		$text = str_replace(array_keys( $replace ), $replace, $text );
-			return $text;
+		$classes = str_replace( array_keys( $replace ), $replace, $classes );
+			return $classes;
 		}
+add_filter ( 'wp_nav_menu'		 ,	'wp_less_is_more__filter__current_to_active'	 );
 
-	/*
-	 * Deletes empty classes and removes the sub menu class
-	 *
-	 * @since WP Less is More 1.0
-	 **/
-
+/**
+ * Deletes empty classes and removes the sub menu class
+ *
+ * @since WP Less is More 1.0
+ */
 function wp_less_is_more__filter__strip_empty_classes( $menu ) {
     $menu = preg_replace( '/ class=""| class="sub-menu"/',' class="dropdown-menu"', $menu );
     return $menu;
 }
-
-add_filter ( 'nav_menu_css_class',  'wp_less_is_more__filter__custom_nav_menu' );
-add_filter ( 'nav_menu_item_id'	 ,	'wp_less_is_more__filter__custom_nav_menu' );
-add_filter ( 'page_css_class'	 , 	'wp_less_is_more__filter__custom_nav_menu' );
-add_filter ( 'wp_nav_menu'		 ,	'wp_less_is_more__filter__current_to_active'	 );
 add_filter ( 'wp_nav_menu'		 ,	'wp_less_is_more__filter__strip_empty_classes');
 
-
-	/*
-	 * This function add img-responsive class within the_content included post_thumbnails.
-	 * If you want to have responsive images outside the_content you have to add this class manually.
-	 *
-	 *  Responsive images:
-	 * 	1) add img-responsive class
-	 * 	2) remove dimensions
-	 *
-	 * @since WP Less is More 1.0
-	 **/
-
-function wp_less_is_more__filter__bootstrap_responsive_images( $html ){
+/**
+ * Add img-responsive class within the_content included post_thumbnails.
+ * If you want to have responsive images outside the_content you have to add this class manually.
+ *
+ * @param string $content Content of the current post.
+ *
+ *  Responsive images:
+ * 	1) add img-responsive class
+ * 	2) remove dimensions
+ *
+ * @since WP Less is More 1.0
+ */
+function wp_less_is_more__filter__bootstrap_responsive_images( $content ){
   $classes = 'img-responsive'; // separated by spaces, e.g. 'img image-link'
 
   // check if there are already classes assigned to the anchor
-  if ( preg_match( '/<img.*? class="/', $html ) ) {
+  if ( preg_match( '/<img.*? class="/', $content ) ) {
 
-    $html = preg_replace( '/(<img.*? class=".*?)(".*?\/>)/', '$1 ' . $classes . ' $2', $html );
+    $content = preg_replace( '/(<img.*? class=".*?)(".*?\/>)/', '$1 ' . $classes . ' $2', $content );
 
   } else {
 
-    $html = preg_replace( '/(<img.*?)(\/>)/', '$1 class="' . $classes . '" $2', $html );
-
+    $content = preg_replace( '/(<img.*?)(\/>)/', '$1 class="' . $classes . '" $2', $content );
   }
 
   // remove dimensions from images,, does not need it!
-  $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+  $content = preg_replace( '/(width|height)=\"\d*\"\s/', "", $content );
 
-  return $html;
+  return $content;
 }
+add_filter( 'the_content', 'wp_less_is_more__filter__bootstrap_responsive_images', 10 );
 
-	/*
-	 * This function removes dimensions from post_thumbnails for better responsive
-	 *
-	 * @since WP Less is More 1.1.2
-	 **/
+/**
+ * Removes dimensions from post_thumbnails for better responsive
+ *
+ * @param string $html    The post thumbnail HTML.
+ *
+ * @since WP Less is More 1.1.2
+ */
 
-function wp_less_is_more__filter__remove_width_and_height( $html, $post_id, $post_thumbnail_id, $size, $attr )
+function wp_less_is_more__filter__remove_width_and_height( $html )
 {
     $html = preg_replace( '/ (width|height)="[^"]+"/', '', $html );
     return $html;
 }
+add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__remove_width_and_height', 10 );
 
-/*
- * This function hides post thumbnail if post required password
- * @return $html on @false
+/**
+ * Hides post thumbnail if post password required
+ *
+ * @return void|string Void on flase, HTML on true
  *
  * @since WP Less is More 1.1.6
- **/
-function wp_less_is_more__filter__hide_thumb_if_post_protected( $html, $post_id, $post_thumbnail_id, $size, $attr ){
+ */
+function wp_less_is_more__filter__hide_thumb_if_post_protected( $html ){
 	if ( ! post_password_required() ) return $html;
 }
-add_filter( 'the_content',			'wp_less_is_more__filter__bootstrap_responsive_images', 10 );
-add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__remove_width_and_height', 10, 5 );
-add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__hide_thumb_if_post_protected', 10, 5 );
+add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__hide_thumb_if_post_protected', 10 );
 
-
-	/** Excerpt lenght **
-	 *
-	 * By default the excerpt length is set to return 55 words.
-	 * This filter is used to change excerpt lenght.
-	 *
-	 *
-	 * @since WP Less is More 1.1.1
-	 **/
-
+/**
+ * Excerpt lenght
+ *
+ * @param integer @lenght    The maximum number of words. Default 55.
+ *
+ * @return integer excerpt_length
+ *
+ * @since WP Less is More 1.1.1
+ */
 function wp_less_is_more__filter__excerpt_length( $length ) {
 
 	$_excerpt_length = wp_less_is_more__default_excerpt_length();
-	$excerpt_length = get_theme_mod('excerpt_length', $_excerpt_length );
+	$excerpt_length = get_theme_mod( 'excerpt_length', $_excerpt_length );
 
 	if ( $excerpt_length == $_excerpt_length )
 		return $_excerpt_length;
@@ -268,8 +277,17 @@ function wp_less_is_more__filter__excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'wp_less_is_more__filter__excerpt_length', 999 );
 
+/**
+ * Filters the HTML output of single page number links.
+ * This filter makes page number $link disable to click
+ * by adding `disabled` class
+ *
+ * @param string $link The page number HTML output.
+ * @param int    $i    Page number for paginated posts' page links.
+ *
+ * @since WP Less is More 1.1.1
+*/
 
-add_filter( 'wp_link_pages_link', 'wp_less_is_more__filter__wp_link_pages_link', 10, 2 );
 function wp_less_is_more__filter__wp_link_pages_link( $link, $i ){
 	global $page;
 
@@ -279,14 +297,14 @@ function wp_less_is_more__filter__wp_link_pages_link( $link, $i ){
 
 	return $link;
 }
+add_filter( 'wp_link_pages_link', 'wp_less_is_more__filter__wp_link_pages_link', 10, 2 );
 
 /** Navigation Markup Template **
  *
  * Add extra class to navigation
  *
  * @since WP Less is More 1.1.6
- **/
-
+ */
 function wp_less_is_more__filter__navigation_markup_template( $template, $class ) {
     $template = '<nav class="navigation text-center center-block %1$s" role="navigation" aria-label="%4$s">
     <h2 class="screen-reader-text">%2$s</h2>
@@ -297,19 +315,19 @@ function wp_less_is_more__filter__navigation_markup_template( $template, $class 
 add_filter( 'navigation_markup_template', 'wp_less_is_more__filter__navigation_markup_template', 10, 2 );
 
 /**
-     * Filters the cancel comment reply link HTML.
-     * Added extra glyphicon-remove and btn class
-		 *
-     * @since WP Less is More 1.1.6
-     *
-     * @param string $formatted_link The HTML-formatted cancel comment reply link.
-     * @param string $link           Cancel comment reply link URL.
-     * @param string $text           Cancel comment reply link text.
-     */
+ * Filters the cancel comment reply link HTML.
+ * Added extra glyphicon-remove and btn class
+ *
+ * @since WP Less is More 1.1.6
+ *
+ * @param string $formatted_link The HTML-formatted cancel comment reply link.
+ * @param string $link           Cancel comment reply link URL.
+ * @param string $text           Cancel comment reply link text.
+ */
 
 function wp_less_is_more__filter__cancel_comment_reply_link( $formatted_link, $link, $text ) {
 
-		$style = isset( $_GET['replytocom'] ) ? '' : ' style="display:none;"';
+	$style = isset( $_GET['replytocom'] ) ? '' : ' style="display:none;"';
     $formatted_link = '<a class="btn btn-sm btn-default" rel="nofollow" id="cancel-comment-reply-link" href="' . $link . '"' . $style . '><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;' . $text . '</a>';
     return $formatted_link;
 }
@@ -325,14 +343,31 @@ add_filter( 'cancel_comment_reply_link', 'wp_less_is_more__filter__cancel_commen
  * @since WP Less is More 1.1.6
  */
 
-add_filter( 'widget_nav_menu_args', 'wp_less_is_more__filter__widget_nav_menu_args', 10, 4 );
-
 function wp_less_is_more__filter__widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance ) {
     $nav_menu_args = array(
-    'walker'			=> New Wp_Less_Is_More_Bootstrap_Navwalker()
+	'menu_class' => 'list-unstyled',
+    'walker'			=> new Wp_Less_Is_More_Bootstrap_Navwalker(),
 );
     return $nav_menu_args;
 }
+add_filter( 'widget_nav_menu_args', 'wp_less_is_more__filter__widget_nav_menu_args', 10, 4 );
+
+/**
+ * Filters the arguments for the Categories widget drop-down.
+ *
+ * @since WP Less is More 1.1.6
+ *
+ * @see wp_dropdown_categories()
+ *
+ * @param array $cat_args An array of Categories widget drop-down arguments.
+ */
+
+function wp_less_is_more__filter__widget_categories_dropdown_args( $cat_args ) {
+
+	$cat_args['class'] = 'form-control';
+    return $cat_args;
+}
+add_filter( 'widget_categories_dropdown_args', 'wp_less_is_more__filter__widget_categories_dropdown_args', 10, 1 );
 
 /**
  * Actions HOOK
@@ -362,21 +397,21 @@ function wp_less_is_more__action__skip_link() {
 
 add_action( 'wp_body_open', 'wp_less_is_more__action__skip_link', 5 );
 
-	/*
-	 * Registers a widget area.
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/register_sidebar/
-	 *
-		*
-		* 	You've got four widgets area
-		* 	1) on the left bottom side of the site
-		* 	2) in the left middle - bottom
-		* 	3) in the right bottom side
-		*   4) on the right bottom side
-		*
-		* @since WP Less is More 1.0
-		*
-		**/
+/**
+ * Registers a widget area.
+ *
+ * @link https://developer.wordpress.org/reference/functions/register_sidebar/
+ *
+ *
+ * 	You've got four widgets area
+ * 	1) on the left bottom side of the site
+ * 	2) in the left middle - bottom
+ * 	3) in the right bottom side
+ *   4) on the right bottom side
+ *
+ * @since WP Less is More 1.0
+ *
+ */
 
 function wp_less_is_more__action__widgets_init() {
 	register_sidebar( array(
@@ -420,70 +455,76 @@ function wp_less_is_more__action__widgets_init() {
 add_action( 'widgets_init', 'wp_less_is_more__action__widgets_init' );
 
 
-	/*
-	 *  Enqueue scripts and styles.
-	 *
-	 * @since WP Less is More 1.0
-	 */
+
+/**
+ *  Enqueue scripts and styles.
+ *
+ * @since WP Less is More 1.0
+ */
 
 function wp_less_is_more__action__enqueue_js_and_css() {
 
-	$theme_data = wp_get_theme();
-	$version = $theme_data->get('Version');
+	$theme_version = wp_get_theme()->get( 'Version' );
 
 	wp_enqueue_script( 'bootstrap', get_stylesheet_directory_uri() . '/bootstrap/js/bootstrap.min.js', array( 'jquery' ), '3.4.1', false );
 
 	wp_enqueue_style( 'bootstrap', get_stylesheet_directory_uri() . '/bootstrap/css/bootstrap.min.css', false, '3.4.1', 'all' );
 
 
-	wp_enqueue_style( 'bootstrap-joombotron-narrow', get_stylesheet_directory_uri() . '/bootstrap/css/jumbotron-narrow.css', false, '3.4.1', 'all' );
+	wp_enqueue_style( 'bootstrap-joombotron-narrow', get_stylesheet_directory_uri() . '/bootstrap/css/jumbotron-narrow.min.css', false, '3.4.1', 'all' );
 
-	wp_enqueue_style( 'wp-less-is-more-style',	get_stylesheet_directory_uri() . '/style.css', false, $version, 'all' );
+	wp_enqueue_style( 'wp-less-is-more-style',	get_stylesheet_directory_uri() . '/style.css', false, $theme_version, 'all' );
 
-	/**
-	*
+	/*
 	* HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
 	*
-	**/
+	*/
 
-	wp_enqueue_script( 'html5shiv', get_template_directory_uri() . '/inc/bootstrap/js/html5shiv.min.js',   false, null, true );
-	wp_enqueue_script( 'respond',	 get_template_directory_uri() . '/inc/bootstrap/js/respond.min.js',	false, null, true );
+	wp_enqueue_script( 'html5shiv', get_template_directory_uri() . '/bootstrap/js/html5shiv.min.js',   false, null, true );
+	wp_enqueue_script( 'respond',	 get_template_directory_uri() . '/bootstrap/js/respond.min.js',	false, null, true );
 
 	wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
-    wp_script_add_data( 'respond',   'conditional', 'lt IE 9' );
+	wp_script_add_data( 'respond',   'conditional', 'lt IE 9' );
 
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' )  ){
+	wp_enqueue_script( 'comment-reply' );
+	/*
+	 * Allowed_tags popover, tooltip and autoheight comment textarea trigger handler
+	 * @since WP Less is More 1.1.7
+	 */
+		wp_enqueue_script ( 'wp-less-is-more-popover',	 get_template_directory_uri() . '/js/wp-less-is-more-popover.min.js', array('jquery'), null, true );
+		// Add allowet tags to localize_script
+		wp_localize_script( 'wp-less-is-more-popover', 'wp_less_is_more_popover', array(
+			'allowed_tags' => htmlspecialchars( allowed_tags() ),
+			'commenttextfocus' => ( isset( $_GET['replytocom'] ) ) ? true:false,
+		));
+	}
 }
 add_action( 'wp_enqueue_scripts', 'wp_less_is_more__action__enqueue_js_and_css' );
 
-/*
- * Enqueue comments reply script when @comment_form_before action hook is fired
+/**
+ * Enqueue script for custom customize control.
  *
- * @since WP Less is More 1.1.6
+ * @since WP Less is More 1.1.1
  */
-
-add_action( 'comment_form_before', 'wp_less_is_more__action__enqueue_comments_reply' );
-function wp_less_is_more__action__enqueue_comments_reply() {
-	if ( comments_open() )	wp_enqueue_script( 'comment-reply' );
-}
-
-	/*
-	 * Enqueue script for custom customize control.
-	 */
 
 function wp_less_is_more__action__customize_enqueue_js() {
 	wp_enqueue_script( 'wp-less-is-more-custom-customize', get_template_directory_uri() . '/inc/customizer/js/wp_less_is_more_show_if_checked.js', array( 'jquery', 'customize-controls' ), false, true );
 }
 add_action( 'customize_controls_enqueue_scripts', 'wp_less_is_more__action__customize_enqueue_js' );
 
-	/*
-	 * ** Custom Site Title **
-	 *
-	 * This function changes the way you see (in header section)
-	 * your site tile (or blog name), depends on different pages
-	 * See line: 27 in header.php file
-	 *
-	 * @since WP Less is More 1.1.0.8
-	 **/
+/**
+ * Custom Site Title
+ *
+ * This function changes the way you see (in header section)
+ * your site tile (or blog name), depends on different pages
+ * See line: 27 in header.php file
+ *
+ * @echo string $site_title
+ *
+ * @since WP Less is More 1.1.0.8
+ */
 
 function wp_less_is_more__site_title(){
 
@@ -504,7 +545,7 @@ function wp_less_is_more__site_title(){
 			}
 
 				// if there is custom page templete used display page title
-				elseif( is_page_template( 'page_list-child-pages.php' ) ) {
+				elseif( is_page_template( 'templates/page_list-child-pages.php' ) ) {
 
 					$site_title =  the_title();
 				}
@@ -516,12 +557,15 @@ function wp_less_is_more__site_title(){
 	echo $site_title;
 }
 
-	/* Taxonomy Title
-	 *
-	 * This function shows the single taxonomy title - styled as breadcrumb - on archive page
-	 *
-	 * @since WP Less is More 1.1.4
-	 */
+/**
+ * Taxonomy Title
+ *
+ * This function shows the single taxonomy title - styled as breadcrumb - on archive page
+ *
+ * @echo @html $output
+ *
+ * @since WP Less is More 1.1.4
+ */
 
 function wp_less_is_more__taxonomy_title(){
 	global $wp_query;
@@ -546,6 +590,10 @@ function wp_less_is_more__taxonomy_title(){
 	$output .= '</li>';
 	$output .= '<li><a href="#">' . single_tag_title( '', false ) . '</a> </li>';
 
+/*
+ * Page number text
+ * @since 1.1.6
+ */
 	if ( $wp_query->max_num_pages > 1 )
 	$output .= '<li><span class="badge">' . sprintf( __( 'page %s', 'wp-less-is-more' ), $paged ) . '</span></li>';
 	$output .= '</ol>';
@@ -555,11 +603,13 @@ function wp_less_is_more__taxonomy_title(){
 	}
 }
 
-	/**
-	 ** Cutom Footer Text
-	 *
-	 * @since WP Less is More 1.1.1
-	 */
+/**
+ ** Cutom Footer Text
+ *
+ * @echo string $text
+ *
+ * @since WP Less is More 1.1.1
+ */
 
 function wp_less_is_more__custom_footer_text(){
 
@@ -571,15 +621,16 @@ function wp_less_is_more__custom_footer_text(){
 	 echo $text;
 }
 
-	/**
-	 * This is a post summary info appears at the bottom of the post but
-	 * over comments section
-	 * You can choose betwen text and icons
-	 * (see in customizer)
-	 *
-	 * @since: WP Less is More 1.1.4
-	 */
-
+/**
+ * This is a post summary info appears at the bottom of the post but
+ * over comments section
+ * You can choose betwen text and icons
+ * (see in customizer)
+ *
+ * @return @html
+ *
+ * @since: WP Less is More 1.1.4
+ */
 
 function wp_less_is_more__entry_meta(){
 
@@ -603,7 +654,6 @@ if( get_the_modified_date() != get_the_date() ) : ?>
 <time class="entry-date updated" title="<?php esc_attr_e( 'Last update', 'wp-less-is-more' ); ?>"><?php the_modified_date(); ?></time>&emsp;
 <?php endif; ?>
 
-
 <span class="text-right glyphicon glyphicon-folder-open" aria-hidden="true" title=" <?php esc_attr_e( 'Category', 'wp-less-is-more' ); ?>"></span><span class="sr-only"><?php _e( 'Category', 'wp-less-is-more' ); ?></span>&ensp;<span class="category"  title=" <?php esc_attr_e( 'Category', 'wp-less-is-more' ); ?>"><?php the_category( '&ensp;&bullet;&ensp;' ); ?></span></p>
 
 	<?php } else {
@@ -617,13 +667,15 @@ if( get_the_modified_date() != get_the_date() ) : ?> &diams; <?php _e( 'Last upd
 
 }
 
-	/*
-	 * Sticky Post handle
-	 *
-	 * Adds `svg` pin to the sticky post title
-	 *
-	 * @since WP Less is More 1.1.5
-	 **/
+/**
+ * Sticky Post handle
+ *
+ * Adds `svg` pin to the sticky post title
+ *
+ * @return @html
+ *
+ * @since WP Less is More 1.1.5
+ **/
 
 function wp_less_is_more__sticky_pin(){
 
@@ -634,15 +686,15 @@ function wp_less_is_more__sticky_pin(){
 ?><img class="pull-right" style="position:relative;top:-0.5rem" width="28" src="<?php echo esc_url( $url ); ?>" alt="<?php esc_attr_e( 'Sticky pin', 'wp-less-is-more' );?>">
 <?php endif;
 }
-	/**
-	 * Post Password Protected handle
-	 *
-	 * Adds `svg` padlock to the protected post title
-	 *
-	 * @return @html
-	 *
-	 * @since WP Less is More 1.1.6
-	 **/
+/**
+ * Post Password Protected handle
+ *
+ * Adds `svg` padlock to the protected post title
+ *
+ * @return @html
+ *
+ * @since WP Less is More 1.1.6
+ */
 
 function wp_less_is_more__password_protcted(){
 
@@ -652,7 +704,7 @@ function wp_less_is_more__password_protcted(){
 }
 
 /**
- * Custom hedar
+ * Custom header
  * Show header image above the top menu
  *
  * @return @html
@@ -675,11 +727,12 @@ echo get_custom_header()->height;
  * Current page number indicator
  * Show current page number under the top menu on home.php template
  * if there is nth(n) page in pagination but not on archive page
+ *
  * @var @paged 	Current Pagination Number
  * @return @html
  *
  * @since WP Less is More 1.1.6
- **/
+ */
 
 function wp_less_is_more__current_page_number(){
 
@@ -696,4 +749,35 @@ printf(
 	__( 'Page №%s', 'wp-less-is-more' ), $paged ); ?>
 </p>
 <?php }
+}
+
+/**
+ * Comment Legend
+ *
+ * @return void|string $output      HTML comment legend text
+ *
+ * @since WP Less is More 1.1.7
+ */
+
+function wp_less_is_more__comment_legend(){
+	//Show comment legenf text if omments_open()
+	if ( comments_open() ){
+
+ // Don't show comment legenf text if comment_registration option is on and user is not logged in
+		if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ){
+			return;
+		}
+
+	$output = '<hr style="margin-top:0">';
+	$output .= '<div class="popoverContainer" style="position:relative">';
+	$output .=  '<p class="small">';
+	$output .= __( '*) Required fields are marked with star', 'wp-less-is-more' ) . '<br>';
+	$output .=  _x( '**) You can use some', 'comment legend part1', 'wp-less-is-more' );
+	$output .= '<button title="' . esc_attr__( 'Alowed HTML tags and attributes', 'wp-less-is-more' ) . '" type="button" class="triggerpopover btn btn-xs btn-link" data-toggle="popover" data-placement="top" role="button">';
+	$output .= _x( 'HTML markup', 'comment legend part2 (button text)', 'wp-less-is-more' );
+	$output .= '<span class="caret"></span></button></p>';
+	$output .= '</div>';
+
+	return $output;
+	}
 }

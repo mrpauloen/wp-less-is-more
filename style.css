@@ -3,12 +3,12 @@ Theme Name: WP Less is More
 Theme URI: https://www.facebook.com/WPSolucje/
 Author: Paweł Nowak
 Author URI: https://www.facebook.com/PawRakiety
-Description: This Theme is designed for business people, who needs stuff like: Landing Pages, Saless Letters, Squeeze Pages and-or ready to Google AdWords theme ONLY because Less is More.
-Version: 1.1.6
+Description: Based on the popular Bootstrap 3 library, this theme shows how mobile friendly CSS framework can be used to create sleek, simple, fast and functional websites, with ease and intuitive way in modern front-end web developmen days.
+Version: 1.1.7
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 7.0
-License: GNU General Public License v2 or later
+License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wp-less-is-more
 Tags: one-column, custom-menu, custom-background, custom-header, custom-logo, editor-style, footer-widgets, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, blog, e-commerce, entertainment
@@ -17,7 +17,7 @@ Domain Path: /languages
 
  == Copyright & License Notes ==
 
- WP Less is More WordPress Theme, Copyright 2016-2019 WPSolucje.tk & Paweł Nowak
+ WP Less is More WordPress Theme, Copyright 2016-2020 Paweł Nowak
  WP Less is More is distributed under the terms of the GNU GPL
 
 
@@ -91,21 +91,21 @@ position: relative;
 }
 .widget-content ul {padding-left: 0}
 footer ul li{
-	list-style: none;
-	text-align: left;
+list-style: none;
+text-align: left;
 }
 
 .navbar-default {
-	padding-bottom: 1px;
+padding-bottom: 1px;
 }
 
 #masthead { margin-bottom: 1px }
 
 div#comments-list > ul > li > ul {
-    border-bottom: 1px solid #D9EDF7;
-    padding-left: 20px;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
+border-bottom: 1px solid #D9EDF7;
+padding-left: 20px;
+padding-bottom: 5px;
+margin-bottom: 20px;
 }
 
 div#comments-list > ul > li.depth-1.parent {
@@ -121,100 +121,100 @@ border: 3px solid #D9EDF7;
 .category a { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
 
 .home .thumbnail {
-	border: none;
+border: none;
 }
 
 /* =WordPress Core
 -------------------------------------------------------------- */
 
 .alignnone {
-    margin: 5px 20px 20px 0;
+margin: 5px 20px 20px 0;
 }
 .aligncenter,
 div.aligncenter {
-    display: block;
-    margin: 5px auto 5px auto;
+display: block;
+margin: 5px auto 5px auto;
 }
 .alignright {
-    float:right;
-    margin: 5px 0 20px 20px;
+float:right;
+margin: 5px 0 20px 20px;
 }
 .alignleft {
-    float: left;
-    margin: 5px 20px 20px 0;
+float: left;
+margin: 5px 20px 20px 0;
 }
 a img.alignright {
-    float: right;
-    margin: 5px 0 20px 20px;
+float: right;
+margin: 5px 0 20px 20px;
 }
 a img.alignnone {
-    margin: 5px 20px 20px 0;
+margin: 5px 20px 20px 0;
 }
 a img.alignleft {
-    float: left;
-    margin: 5px 20px 20px 0;
+float: left;
+margin: 5px 20px 20px 0;
 }
 a img.aligncenter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
+display: block;
+margin-left: auto;
+margin-right: auto
 }
 .wp-caption {
-    background: #fff;
-    border: 1px solid #f0f0f0;
-    max-width: 96%; /* Image does not overflow the content area */
-    padding: 5px 3px 10px;
-    text-align: center;
+background: #fff;
+border: 1px solid #f0f0f0;
+max-width: 96%; /* Image does not overflow the content area */
+padding: 5px 3px 10px;
+text-align: center;
 }
 .wp-caption.alignnone {
-    margin: 5px 20px 20px 0;
+margin: 5px 20px 20px 0;
 }
 .wp-caption.alignleft {
-    margin: 5px 20px 20px 0;
+margin: 5px 20px 20px 0;
 }
 .wp-caption.alignright {
-    margin: 5px 0 20px 20px;
+margin: 5px 0 20px 20px;
 }
 .wp-caption img {
-    border: 0 none;
-    height: auto;
-    margin: 0;
-    max-width: 98.5%;
-    padding: 0;
-    width: auto;
+border: 0 none;
+height: auto;
+margin: 0;
+max-width: 98.5%;
+padding: 0;
+width: auto;
 }
 .wp-caption p.wp-caption-text {
-    font-size: 11px;
-    line-height: 17px;
-    margin: 0;
-    padding: 0 4px 5px;
+font-size: 11px;
+line-height: 17px;
+margin: 0;
+padding: 0 4px 5px;
 }
 /* Text meant only for screen readers. */
 .screen-reader-text {
-	clip: rect(1px, 1px, 1px, 1px);
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
+clip: rect(1px, 1px, 1px, 1px);
+position: absolute !important;
+height: 1px;
+width: 1px;
+overflow: hidden;
 }
 .screen-reader-text:focus {
-	background-color: #f1f1f1;
-	border-radius: 3px;
-	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-	clip: auto !important;
-	color: #21759b;
-	display: block;
-	font-size: 14px;
-	font-size: 0.875rem;
-	font-weight: bold;
-	height: auto;
-	left: 5px;
-	line-height: normal;
-	padding: 15px 23px 14px;
-	text-decoration: none;
-	top: 5px;
-	width: auto;
-	z-index: 100000; /* Above WP toolbar. */
+background-color: #f1f1f1;
+border-radius: 3px;
+box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+clip: auto !important;
+color: #21759b;
+display: block;
+font-size: 14px;
+font-size: 0.875rem;
+font-weight: bold;
+height: auto;
+left: 5px;
+line-height: normal;
+padding: 15px 23px 14px;
+text-decoration: none;
+top: 5px;
+width: auto;
+z-index: 100000; /* Above WP toolbar. */
 }
 
 .sticky h3 a{ color: white;}
@@ -278,8 +278,8 @@ p img.alignright, p img.alignleft {margin-top:0;}
 .gallery.gallery-columns-9 figure:nth-of-type(9n+10) {clear:left;}
 
 @media (max-width:767px) {
-	img.alignright, div.alignright, figure.alignright, img.alignleft, div.alignleft, figure.alignleft, img.wp-post-image.attachment-thumb {display:block; margin:1em auto; float:none;}
-	.gallery.gallery-columns-4 figure, .gallery.gallery-columns-5 figure, .gallery.gallery-columns-6 figure, .gallery.gallery-columns-7 figure, .gallery.gallery-columns-8 figure, .gallery.gallery-columns-9 figure {width:100%; margin:0 0 1em 0; float:none;}
+img.alignright, div.alignright, figure.alignright, img.alignleft, div.alignleft, figure.alignleft, img.wp-post-image.attachment-thumb {display:block; margin:1em auto; float:none;}
+.gallery.gallery-columns-4 figure, .gallery.gallery-columns-5 figure, .gallery.gallery-columns-6 figure, .gallery.gallery-columns-7 figure, .gallery.gallery-columns-8 figure, .gallery.gallery-columns-9 figure {width:100%; margin:0 0 1em 0; float:none;}
 }
 .bg-red{background:#d9534f}
 .text-break{-ms-word-wrap: break-word;
@@ -289,11 +289,11 @@ word-break: break-word !important;
 overflow-wrap: break-word !important;
 }
 .code {
-	  font-family: Menlo,Monaco,Consolas,"Courier New",monospace
-    padding: 2px 4px;
-    font-size: 90%;
-    color: #c7254e;
-    background-color: #f9f2f4;
-    border-radius: 4px
+font-family: Menlo,Monaco,Consolas,"Courier New",monospace
+padding: 2px 4px;
+font-size: 90%;
+color: #c7254e;
+background-color: #f9f2f4;
+border-radius: 4px
 }
 .mt-3{margin-top: 10px}

@@ -37,4 +37,4 @@
         'after_page_number'  => '</span>',
     );
 the_posts_pagination( $args );
-get_footer(); ?>
+get_footer();

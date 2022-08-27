@@ -269,9 +269,11 @@ function wp_less_is_more__theme_customize( $wp_customize ) {
 		'excerpt_length_section',
 		array(
 			'title'      => __( 'Excerpt lenght','wp-less-is-more' ),
-			'description'	=> sprintf( __( 'Use this option to control the excerpt lenght on the home page.
-The default excerpt length is 55 words. This setting works only when a post themplate use <code>%s</code> template tag and the excerpt is created automatically (excerpt meta box on the post editor screen is empty) but no longer than the <code>%s</code> tag (if it\'s used).
-See: <a href="%s" target="_blank">Excerpt</a> or <a href="%s" target="_blank">Customizing_the_Read_More</a> in codex.', 'wp-less-is-more'),
+			'description'	=> sprintf( 
+			/* translators: %1$s: the_excerpt (word); %2$s !--more-- (tag); %3$s: url to codex; %4$s: url to codex */
+			__( 'Use this option to control the excerpt lenght on the home page.
+The default excerpt length is 55 words. This setting works only when a post themplate use <code>%1$s</code> template tag and the excerpt is created automatically (excerpt meta box on the post editor screen is empty) but no longer than the <code>%2$s</code> tag (if it\'s used).
+See: <a href="%3$s" target="_blank">Excerpt</a> or <a href="%4$s" target="_blank">Customizing_the_Read_More</a> in codex.', 'wp-less-is-more'),
 			esc_html__( 'the_excerpt', 'wp-less-is-more' ),
 			esc_html__( '&lt;!--more--&gt;', 'wp-less-is-more'  ),
 			esc_url('https://codex.wordpress.org/Excerpt' ),

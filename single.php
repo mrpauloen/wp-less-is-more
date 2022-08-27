@@ -3,7 +3,7 @@
 	if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
 <article id="site-content" class="text-break">
-<h3 class="text-center container single-entry-title entry-title"><?php wp_less_is_more__password_protcted(); ?><?php the_title(); ?></h3>
+<h3 class="container single-entry-title entry-title"><?php wp_less_is_more__password_protcted(); ?><?php the_title(); ?></h3>
 <hr/>
 
 <?php  the_post_thumbnail( 'post-thumbnail', array ( 'class' => 'img-responsive' )); ?>
@@ -50,4 +50,4 @@
 <?php endwhile; else: ?>
 <p><?php _e( 'Sorry, no posts matched your criteria.', 'wp-less-is-more' ); ?></p>
 <?php endif;
-get_footer(); ?>
+get_footer();

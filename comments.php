@@ -27,12 +27,11 @@
      $req			= get_option( 'require_name_email' );
      $aria_req		= ( $req ? " aria-required='true'" : '' );
      $user			= wp_get_current_user();
-     $user_identity	= $user->exists() ? $user->display_name : '';
-
-
+     
+     $collapse = ( isset( $_GET['replytocom'] ) ) ? '' : 'collapse';
      $fields =  array(
 
-     'author' => '<div id="form-input" class="collapse row"><br><div class="col-xs-8 col-sm-4">
+     'author' => '<div id="form-input" class="' . esc_attr( $collapse ) . ' row"><br><div class="col-xs-8 col-sm-4">
          <div class="form-group">
 
          <div class="input-group">
@@ -75,10 +74,10 @@
      'class_form'			=> '',
      'title_reply'      		=> '',
      'title_reply_to'    	=> __( 'You reply to: %s', "wp-less-is-more" )  . '&emsp;',
-     'title_reply_before'	=> '<h4>',
-     'title_reply_after'		=> '',
-     'cancel_reply_before'	=> '',
-     'cancel_reply_after'	=> '</h4>',
+     'title_reply_before'	=> '<h4 id="reply-title" class="comment-reply-title">',
+     'title_reply_after'		=> '</h4>',
+     'cancel_reply_before'	=> ' ',
+     'cancel_reply_after'	=> '',
      'cancel_reply_link'		=> __( 'Cancel', 'wp-less-is-more' ),
      'id_submit'				=> 'submit',
      'class_submit'			=> 'btn btn-primary btn-sm',
@@ -89,7 +88,8 @@
       </div></div><br>',
      'must_log_in'			=> '<p class="p-3 bg-dark text-white must-log-in">' .
      sprintf(
-       __( 'You must be <a href="%s">%s logged in</a> to post a comment.', 'wp-less-is-more' ), wp_login_url( apply_filters( 'the_permalink', get_permalink() . '#comments' )), '<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;'
+	 /* translators: %1$s: login url; %2$s: glyphicon-log-in */
+       __( 'You must be <a href="%1$s">%2$s logged in</a> to post a comment.', 'wp-less-is-more' ), wp_login_url( apply_filters( 'the_permalink', get_permalink() . '#comments' )), '<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>'
      ) . '</p>',
 
      'logged_in_as' 			=> '',
@@ -101,35 +101,8 @@
 
 
      );
-     ?>
-<script>
-jQuery.noConflict();
-jQuery( document ).ready( function( $ ){
-    $('[data-toggle="tooltip"]').tooltip();
-    $('.triggerpopover').popover({
-        container: 'div.popoverContainer',
-        html: true,
-        content: function () {
-        return '<code><?php echo allowed_tags(); ?></code>';
-      },
-    });
-    $('#commenttext').each(function () {
-      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-      this.style.height = 'auto';
-      this.style.height = (this.scrollHeight) + 'px';
-    });
-    $('#commenttext').css('height', '35');
-    $('#commenttext').focus(function(){
-       $('#form-input').collapse();
-    });
-    <?php if ( isset( $_GET['replytocom'] ) ) { ?>
-    $('#commenttext').focus();
-      <?php } ?>
-});
-</script>
 
-<?php // If comments are closed and there are comments, let's leave a little note, shall we?
+// If comments are closed and there are comments, let's leave a little note, shall we?
 if ( have_comments() && ! comments_open() && $comments_number && ! is_page() ){
 ?>
 <div class="alert alert-danger" role="alert"><?php printf(
@@ -141,8 +114,7 @@ if ( have_comments() && ! comments_open() && $comments_number && ! is_page() ){
 
 	<div class="container row">
   <h2><?php printf(
-    /* translators: %s: Number of comments.
-    * translators: `Comments` word stay always in plural eg: Comments |1|
+    /* translators: %s: Number of comments. `Comments` word stay always in plural eg: Comments |1|
     */
     __( 'Comments |%s|', 'wp-less-is-more' ),
      $comments_number ); ?></h2>
@@ -178,12 +150,4 @@ if ( have_comments() && get_comment_pages_count() > 1 && get_option( 'page_comme
     <li><?php next_comments_link( __( 'Newer', 'wp-less-is-more' ) ); ?></li>
   </ul>
 </nav>
-<?php }
-
-if ( comments_open() ){ ?>
-	<hr style="margin-top:0">
-<div class="popoverContainer" style="position:relative">
-  <p class="small"><?php _e( '*) Required fields are marked with star', 'wp-less-is-more' ); ?><br/>
-  <?php echo _x( '**) You can use some', 'comment legend', 'wp-less-is-more' ); ?><button title="<?php esc_attr_e( 'Alowed HTML tags and attributes', 'wp-less-is-more' ); ?>" type="button" class="triggerpopover btn btn-xs btn-link" data-toggle="popover" data-placement="top" role="button"><?php echo _x( 'HTML markup', 'comment legend (button text)', 'wp-less-is-more' ); ?> <span class="caret"></span></button></p>
-</div>
-<?php }
+<?php } echo wp_less_is_more__comment_legend();

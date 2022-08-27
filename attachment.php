@@ -13,4 +13,4 @@
 <?php endwhile; else: ?>
 <p><?php _e( 'Sorry, no posts matched your criteria.', 'wp-less-is-more' ); ?></p>
 <?php endif;
-get_footer(); ?>
+get_footer();
