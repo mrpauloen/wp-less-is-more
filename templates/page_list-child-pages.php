@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: List Child Pages
  * Description: This template lists all the sub-pages in a bulleted list. Choose one of your page as parent and list all of its child pages in a nice and clear list of pages.
@@ -19,12 +20,15 @@
 <article>
 
 <?php
+
 global $post;
 
 if ( is_page() && $post->post_parent )
 
 	$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->post_parent . '&echo=0' );
+
 else
+
 	$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->ID . '&echo=0' );
 
 if ( $childpages ) {
@@ -33,18 +37,19 @@ if ( $childpages ) {
 
 }
 
-
 ?>
 
 <!--
-
 <?php trackback_rdf(); ?>
-
 -->
 
 </article>
 
 <?php endwhile; else: ?>
+
 <p><?php _e( 'Sorry, no posts matched your criteria.', 'wp-less-is-more' ); ?></p>
+
 <?php endif;
+
 get_footer(); ?>
+

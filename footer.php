@@ -14,6 +14,7 @@
 
 		)
 	);
+
 ?>
 
 <p class="copyright"><?php // See: line 596 in functions.php
@@ -21,7 +22,9 @@
 	wp_less_is_more__custom_footer_text(); ?></p>
 
 </footer>
+
 </div>
+
  <!-- End of main container -->
 
  <?php wp_footer(); ?>

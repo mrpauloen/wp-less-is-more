@@ -1,10 +1,10 @@
 == WP Less is More ==
 Editors: mrpauloen
-Contributors: miccweb
+Contributors: miccweb, @szepeviktor
 Requires at least: 5.0
 Requires PHP: 7.0
-Tested up to: 5.5
-Version: 1.1.7
+Tested up to: 6.0
+Version: 1.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: responsive-layout, mobile-ready, light, white, narrow, one-column, custom-menu, custom-background, custom-header, custom-logo, editor-style, footer-widgets, featured-images, sticky-post, post-formats, theme-options, threaded-comments, translation-ready, blog, e-commerce, entertainment, portfolio
@@ -13,11 +13,8 @@ Tags: responsive-layout, mobile-ready, light, white, narrow, one-column, custom-
 
 Based on the popular Bootstrap 3 library, this theme shows how mobile friendly CSS framework can be used to create sleek, simple, fast and functional websites, with ease and intuitive way in modern front-end web developmen days.
 
-
 == Installation ==
-
 Manual installation:
-
 1. Download the wp-less-is-more.zip archiwe from WordPress repository on the computer.
 2. Unzip the archive
 3. Then Upload the wp-less-is-more folder to the /wp-content/themes/ directory
@@ -34,11 +31,12 @@ Activiation and Use
 1. Activate the Theme through the ''Themes'' menu in WordPress
 2. See Appearance -> Theme Options to change theme specific options
 
-
 == Copyright & License Notes ==
 
-WP Less is More WordPress Theme, Copyright 2016-2020 Pawel Nowak
+
+WP Less is More WordPress Theme, Copyright 2016-2022 Pawel Nowak
 WP Less is More is distributed under the terms of the GNU GPL
+
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -55,6 +53,7 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
+
 
 ''' WP Less is More theme bundles the following third-party resources: '''
 
@@ -78,6 +77,7 @@ GNU General Public License for more details.
 ** Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 ** Or: 					http://getbootstrap.com/getting-started/#license-faqs
 
+
 *! HTML5 Shiv v3.7.0,
 ** Copyright 2014 Alexander Farkas
 ** Licenses: 	MIT/GPL2
@@ -87,6 +87,7 @@ GNU General Public License for more details.
 ** Copyright 2013 Scott Jehl
 ** Licensed under https://github.com/scottjehl/Respond/blob/master/LICENSE-MIT
 
+
 *! @Wp_Bootstrap_Navwalker class for Custom Navigation Walker
 ** GitHub URI: 	https://github.com/twittem/wp-bootstrap-navwalker
 ** Version: 	2.0.4
@@ -94,13 +95,10 @@ GNU General Public License for more details.
 ** License: 	GPL-2.0+
 ** License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-
 == Theme Features ==
-
 '''Theme has several options available from Customizer'''
 
 === Read Me First section ===
-
 Here you can find quick links to most important sites like:
 * support
 * review
@@ -142,8 +140,16 @@ https://www.facebook.com/WPSolucje/
 or better use official WordPress support forum on theme forums:
 https://wordpress.org/support/theme/wp-less-is-more
 
-
 == Changelog ==
+
+=== 1.1.8 ===
+''Released: Oktober 22, 2022
+
+==== Maintaining support ====
+
+* New Contributor on GitHub: @szepeviktor
+* Code reviewed and made some fixes
+* Added Starter Content
 
 === 1.1.7 ===
 ''Released: August 16, 2020''
@@ -189,6 +195,8 @@ https://wordpress.org/support/theme/wp-less-is-more
 ** pencil icon to point customizer container
 ** templates folder
 
+
+
 === 1.1.5 ===
 ''Released: August 25, 2019''
 
@@ -218,7 +226,6 @@ https://wordpress.org/support/theme/wp-less-is-more
 *** Read Me section (for better support)
 * Post author is now hyperlinced with ''the_author_link()'' function
 
-
 === 1.1.3 ===
 ''Released: April 06, 2017''
 
@@ -244,6 +251,7 @@ https://wordpress.org/support/theme/wp-less-is-more
 * Removed/replaced ''Leave a Response'' button
 * Removed collapse effect (class) from form
 ** See: ''inc/customizer/customizer.php''
+
 
 === 1.1.0.8 ===
 ''Released: July 26, 2016''

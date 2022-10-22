@@ -20,14 +20,13 @@
 		'pagelink'		=> _x( 'part: %', 'category & tag page', 'wp-less-is-more' )
 
 	));
+
 ?>
 
 <div class="clearfix"></div>
 
 <!--
-
 <?php trackback_rdf(); ?>
-
 -->
 
 <?php comments_template(); ?>
@@ -35,6 +34,9 @@
 </article>
 
 <?php endwhile; else: ?>
+
 <p><?php _e( 'Sorry, no posts matched your criteria.', 'wp-less-is-more' ); ?></p>
+
 <?php endif;
+
 get_footer();

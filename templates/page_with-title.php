@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Page with title
  * Description: This template show page with title above thumbnail. It has been created because standart (default) page template hasn't it.
@@ -35,19 +36,22 @@
 		'pagelink'		=> _x( 'part: %', 'category & tag page', 'wp-less-is-more' )
 
 	));
+
 ?>
 
 <div class="clearfix"></div>
 
 <!--
-
 <?php trackback_rdf(); ?>
-
 -->
 
 </article>
 
 <?php endwhile; else: ?>
+
 <p><?php _e( 'Sorry, no posts matched your criteria.', 'wp-less-is-more' ); ?></p>
+
 <?php endif;
+
 get_footer();
+

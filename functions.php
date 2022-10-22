@@ -3,38 +3,36 @@
 /**
  * WP Less is More functions and definitions
  *
- * @package WordPress
- * @subpackage WP Less is More
  * @since WP Less is More 1.0
  */
 
- /*
-	* Customizer additions.
-	*
-	* @since WP Less is More 1.1.1
-	*/
+ /**
+ * Customizer additions.
+ *
+ * @since WP Less is More 1.1.1
+ */
 
 require trailingslashit( get_template_directory() ) . 'inc/customizer/customizer.php';
 
  /*
-	* Define Dropdowns Bootstrap Menu **
-	*
-	* ** If you want to have dropdowns, bootstrtap menu, you have to:
-	* 	1) Register Custom Navigation Walker
-	* 	2) Replaces "current-menu-item" with "active"
-	* 	3) Deletes all CSS classes and id's, except for those listed in the @array
-	* 	4) Deletes empty classes and removes the sub menu class
-	*
-	* @since WP Less is More 1.0
-	*/
+ * Define Dropdowns Bootstrap Menu **
+ *
+ * ** If you want to have dropdowns, bootstrtap menu, you have to:
+ * 	1) Register Custom Navigation Walker
+ * 	2) Replaces "current-menu-item" with "active"
+ * 	3) Deletes all CSS classes and id's, except for those listed in the @array
+ * 	4) Deletes empty classes and removes the sub menu class
+ *
+ * @since WP Less is More 1.0
+ */
 
 require trailingslashit( get_template_directory() ) . 'classes/wp-less-is-more-bootstrap-navwalker.php';
 
-/*
+/**
  * Define Custom Comments Walker
  *
  * @since WP Less is More 1.1.6
- **/
+ */
 
 require trailingslashit( get_template_directory() ) . 'classes/wp-less-is-more-comments-walker.php';
 
@@ -100,11 +98,6 @@ function wp_less_is_more__theme_setup() {
 		register_nav_menus( array (
 		'top'	 => __( 'Top Menu', 	'wp-less-is-more'),
 		'bottom' => __( 'Bottom Menu', 	'wp-less-is-more'),
-
-		'w-sidebar-left' 		=> __( 'Left Bottom Widget Menu', 			'wp-less-is-more' ),
-		'w-sidebar-middle-left'	=> __( 'Middle Left  Bottom Widget Menu', 	'wp-less-is-more' ),
-		'w-sidebar-middle-right'=> __( 'Middle Right Bottom Widget Menu', 	'wp-less-is-more' ),
-		'w-sidebar-right'		=> __( 'Right Bottom Widget Menu', 			'wp-less-is-more' ),
 		));
 
 	/**
@@ -138,6 +131,22 @@ function wp_less_is_more__theme_setup() {
 	 */
 	add_editor_style( 'bootstrap/css/editor-style.css' );
 
+	/**
+	 * Add theme support for selective refresh for widgets.
+	 * @since 1.1.8
+	 */
+	add_theme_support( 'customize-selective-refresh-widgets' );
+
+
+	/**
+	 *  Adds starter content to highlight the theme on fresh sites.
+	 * 	 * This is done conditionally to avoid loading the starter content on every
+	 * 	 * page load, as it is a one-off operation only needed once in the customizer.
+	 */
+		if ( is_customize_preview() ) {
+			require get_template_directory() . '/inc/starter-content.php';
+			add_theme_support( 'starter-content', wp_less_is_more__get_starter_content() );
+		}
 }
 add_action( 'after_setup_theme', 'wp_less_is_more__theme_setup' );
 
