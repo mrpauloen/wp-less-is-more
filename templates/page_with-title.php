@@ -1,12 +1,28 @@
-<?php get_header();
+<?php
+
+/**
+ * Template Name: Page with title
+ * Description: This template show page with title above thumbnail. It has been created because standart (default) page template hasn't it.
+ *
+ ** Use @wp_list_pages() function **
+ *  Doc: https://developer.wordpress.org/reference/functions/wp_list_pages/
+ *
+ * @package WordPress
+ * @subpackage WP Less is More
+ * @since WP Less is More 1.1.1
+ */
+
+ get_header();
 
 	if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-<article id="site-content" class="text-break">
+<article>
+
+<h3 class="container single-entry-title entry-title"><?php the_title(); ?></h3><hr/>
 
 <?php the_post_thumbnail( 'post-thumbnail', array( 'class' => 'img-responsive')) ?>
 
-<div class="clearfix"></div>
+<div class="clearfix top"></div>
 
 <?php the_content();
 
@@ -29,8 +45,6 @@
 <?php trackback_rdf(); ?>
 -->
 
-<?php comments_template(); ?>
-
 </article>
 
 <?php endwhile; else: ?>
@@ -40,3 +54,4 @@
 <?php endif;
 
 get_footer();
+

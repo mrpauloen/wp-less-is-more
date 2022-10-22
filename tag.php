@@ -3,6 +3,7 @@
 	if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
 <article class="text-break">
+
 <h4><a href="<?php the_permalink(); ?>"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <?php the_title(); ?> </a></h4>
 
 <?php wp_link_pages(
@@ -18,23 +19,27 @@
 ?>
 
 <!--
-
 <?php trackback_rdf(); ?>
-
 -->
 
 </article>
 
 <?php endwhile; else: ?>
+
 <p><?php _e( 'Sorry, no posts matched your criteria.', 'wp-less-is-more' ); ?></p>
+
 <?php endif;
 
-$args = array(
+the_posts_pagination(
+
+	$args = array(
+
 		'prev_next'          => true,
 		'prev_text'          => '<span title="' . __( '&larr; Click to: Previous Page', 'wp-less-is-more' ) . '" class="badge bg-red">' . __( '&loarr; Previous', 'wp-less-is-more' ) . '</span>',
 		'next_text'          => '<span title="' . __( 'Click to: Next Page &rarr;', 'wp-less-is-more' ) . '" class="badge bg-red">' . __( 'Next &roarr;', 'wp-less-is-more' ) . '</span>',
 		'before_page_number' => '<span title="' . __( 'Another page number in pagination', 'wp-less-is-more' ) . '" class="badge bg-red">',
 		'after_page_number'  => '</span>',
-);
-the_posts_pagination( $args );
+
+	));
+
 get_footer();

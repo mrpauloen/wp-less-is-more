@@ -12,6 +12,7 @@ var target = $( '#customize-control-custom_footer_control' );
         }
 
 	$( element ).click( function () {
+
 		if ( $( this ).is( ':checked' )) {
 			target.show();
 		} else {
