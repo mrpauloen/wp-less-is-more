@@ -4,11 +4,11 @@
 Summary:           | WP Less is More
 -------------------|----------------
 Editors:           | [@mrpauloen](https://profiles.wordpress.org/mrpauloen/)
-Contributors:      | [@miccweb](https://profiles.wordpress.org/miccweb/)
-Requires at least: | 5.0
+Contributors:      | [@miccweb](https://profiles.wordpress.org/miccweb/), [@szepeviktor](https://github.com/szepeviktor)
+Requires at least: | 5.5
 Requires PHP:      | 7.0
-Tested up to:      | 5.5
-Version:           | 1.1.7
+Tested up to:      | 6.0
+Version:           | 1.1.9
 License:           | GPLv2 or later
 License URI:       | http://www.gnu.org/licenses/gpl-2.0.html
 Tags:              | responsive-layout, mobile-ready, light, white, narrow, one-column, custom-menu, custom-background, custom-header, custom-logo, editor-style, footer-widgets, featured-images, sticky-post, post-formats, theme-options, threaded-comments, translation-ready, blog, e-commerce, entertainment, portfolio
@@ -22,7 +22,7 @@ Based on the popular Bootstrap 3 library, this theme shows how mobile friendly C
 
 Manual installation:
 
-1. Download the `wp-less-is-more.zip` archiwe from WordPress repository on the computer.
+1. Download the [`wp-less-is-more.zip`](https://downloads.wordpress.org/theme/wp-less-is-more.1.1.9.zip) archiwe from [WordPress repository](https://wordpress.org/themes/wp-less-is-more/) on the computer.
 2. Unzip the archive
 3. Then Upload the `wp-less-is-more` folder to the `/wp-content/themes/` directory
 
@@ -41,7 +41,7 @@ Activiation and Use
 
 ## Copyright & License Notes
 
-WP Less is More WordPress Theme, Copyright 2016-2020 Paweł Nowak
+WP Less is More WordPress Theme, Copyright 2016-2022 Paweł Nowak
 
 WP Less is More is distributed under the terms of the GNU GPL
 
@@ -141,13 +141,48 @@ Widges are in responsive columns. Preview shown on screenshot.
 
 ## Support
 
-To contact with me, use facebook fanpage:
-https://www.facebook.com/WPSolucje/
-or better use official WordPress support forum on theme forums:
+If there is something you don't understand, please use official WordPress support forum on theme forums:
 https://wordpress.org/support/theme/wp-less-is-more
+
+## Contribute
+
+Are you familiar with github? Great! Use it as an extended support for reporting any bugs, keep track of tasks, propose enhancements or contributing to project.
+https://github.com/mrpauloen/wp-less-is-more
+
+## Upgrade
+
+If you are interested in making major changes or looking for paid help, write me a message to fanpage, or just simple create a new (separate) thread on the support forum.
+https://www.facebook.com/WPSolucje/
+
+## Components
+
+If you want to beautify your theme using the ready-made CSS, HTML and JS components, go to the official Bootstrap 3 Documentation site.
+https://getbootstrap.com/docs/3.4/components/
+
+### Some improvements comming soon! :)
 
 
 ## Changelog
+
+### 1.1.9
+*Released: Oktober 30, 2022*
+
+* Code reviewed with WPThemeReview and WordPress-Core standards
+* Removed fields argument from comment_form()
+* Add 4 new filters to comment form field:
+  - comment_form_field_author
+  - comment_form_field_email
+  - comment_form_field_url
+  - comment_form_field_cookies
+
+### 1.1.8
+*Released: Oktober 22, 2022*
+
+ Maintaining support
+
+* New Contributor on GitHub: @szepeviktor
+* Code reviewed and made some fixes
+* Added Starter Content
 
 ### 1.1.7
 *Released: August 16, 2020*
@@ -160,7 +195,7 @@ https://wordpress.org/support/theme/wp-less-is-more
 * Minified `jumbotron-narrow.css` and `wp-less-is-more-popover.js`
 * Theme description changed to more reliable
 
-## 1.1.6
+### 1.1.6
 *Released: August 09, 2020*
 
 * Theme URI changed to: https://www.facebook.com/WPSolucje/
