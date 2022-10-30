@@ -6,15 +6,15 @@
  * @since WP Less is More 1.0
  */
 
- /**
+/**
  * Customizer additions.
  *
  * @since WP Less is More 1.1.1
  */
 
-require trailingslashit( get_template_directory() ) . 'inc/customizer/customizer.php';
+require trailingslashit( get_template_directory() ) . 'inc/customizer/class-wp-less-is-more-customizer.php';
 
- /*
+/*
  * Define Dropdowns Bootstrap Menu **
  *
  * ** If you want to have dropdowns, bootstrtap menu, you have to:
@@ -26,7 +26,7 @@ require trailingslashit( get_template_directory() ) . 'inc/customizer/customizer
  * @since WP Less is More 1.0
  */
 
-require trailingslashit( get_template_directory() ) . 'classes/wp-less-is-more-bootstrap-navwalker.php';
+require trailingslashit( get_template_directory() ) . 'classes/class-wp-less-is-more-bootstrap-navwalker.php';
 
 /**
  * Define Custom Comments Walker
@@ -34,7 +34,7 @@ require trailingslashit( get_template_directory() ) . 'classes/wp-less-is-more-b
  * @since WP Less is More 1.1.6
  */
 
-require trailingslashit( get_template_directory() ) . 'classes/wp-less-is-more-comments-walker.php';
+require trailingslashit( get_template_directory() ) . 'classes/class-wp-less-is-more-comments-walker.php';
 
 /**
  * Sets up theme defaults and registers the various WordPress features that
@@ -54,9 +54,9 @@ function wp_less_is_more__theme_setup() {
 	/*
 	 * Set the content width based on the theme's design and stylesheet.
 	 */
-		global $content_width;
+	global $content_width;
 
-		if ( ! isset( $content_width ) ) {
+	if ( ! isset( $content_width ) ) {
 		$content_width = 692;
 	}
 
@@ -85,20 +85,25 @@ function wp_less_is_more__theme_setup() {
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
 	 */
-	add_theme_support( 'html5', array(
-		'search-form',
-		'comment-form',
-		'comment-list',
-		'gallery',
-	  'caption'
-	) );
+	add_theme_support(
+		'html5',
+		array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+		)
+	);
 
 	// This theme uses wp_nav_menu() in six locations.
 
-		register_nav_menus( array (
-		'top'	 => __( 'Top Menu', 	'wp-less-is-more'),
-		'bottom' => __( 'Bottom Menu', 	'wp-less-is-more'),
-		));
+	register_nav_menus(
+		array(
+			'top'    => __( 'Top Menu', 'wp-less-is-more' ),
+			'bottom' => __( 'Bottom Menu', 'wp-less-is-more' ),
+		)
+	);
 
 	/**
 	 * Enable support for Post Thumbnails on posts and pages.
@@ -107,25 +112,25 @@ function wp_less_is_more__theme_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
-	/*
+	/**
 	 * Enable support for custom logo.
 	 *
 	 */
 
-	 $defaults = array(
-		'header-text'           => false,
-		'random-default'		=> false,
-		'width'					=> 700,
-		'height'				=> 150,
-		'flex-height'			=> true,
-		'flex-width'			=> true,
-		'uploads'				=> true,
-
+	$defaults = array(
+		'header-text'    => false,
+		'random-default' => false,
+		'width'          => 700,
+		'height'         => 150,
+		'flex-height'    => true,
+		'flex-width'     => true,
+		'uploads'        => true,
 	);
-	add_theme_support( 'custom-header', $defaults );
-	add_theme_support( 'custom-background', $args = array());
 
-	/*
+	add_theme_support( 'custom-header', $defaults );
+	add_theme_support( 'custom-background', $args = array() );
+
+	/**
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, icons, and column width.
 	 */
@@ -137,16 +142,15 @@ function wp_less_is_more__theme_setup() {
 	 */
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
-
 	/**
-	 *  Adds starter content to highlight the theme on fresh sites.
-	 * 	 * This is done conditionally to avoid loading the starter content on every
-	 * 	 * page load, as it is a one-off operation only needed once in the customizer.
+	 * Adds starter content to highlight the theme on fresh sites.
+	 * This is done conditionally to avoid loading the starter content on every
+	 * page load, as it is a one-off operation only needed once in the customizer.
 	 */
-		if ( is_customize_preview() ) {
-			require get_template_directory() . '/inc/starter-content.php';
-			add_theme_support( 'starter-content', wp_less_is_more__get_starter_content() );
-		}
+	if ( is_customize_preview() ) {
+		require get_template_directory() . '/inc/starter-content.php';
+		add_theme_support( 'starter-content', wp_less_is_more__get_starter_content() );
+	}
 }
 add_action( 'after_setup_theme', 'wp_less_is_more__theme_setup' );
 
@@ -161,40 +165,42 @@ add_action( 'after_setup_theme', 'wp_less_is_more__theme_setup' );
  * @since WP Less is More 1.0
  */
 function wp_less_is_more__filter__custom_nav_menu( $classes ) {
-		return is_array( $classes ) ? array_intersect( $classes, array(
-				//List of allowed menu classes
-				'current-menu-item',
-				'current_page_item',
-				'current_page_parent',
-				'current_page_ancestor',
-				'first',
-				'last',
-				'vertical',
-				'horizontal'
-				)
-		) : '';
+	return is_array( $classes ) ? array_intersect(
+		$classes,
+		array(
+			//List of allowed menu classes
+			'current-menu-item',
+			'current_page_item',
+			'current_page_parent',
+			'current_page_ancestor',
+			'first',
+			'last',
+			'vertical',
+			'horizontal',
+		)
+	) : '';
 }
-add_filter ( 'nav_menu_css_class',  'wp_less_is_more__filter__custom_nav_menu' );
-add_filter ( 'nav_menu_item_id'	 ,	'wp_less_is_more__filter__custom_nav_menu' );
-add_filter ( 'page_css_class'	 , 	'wp_less_is_more__filter__custom_nav_menu' );
+add_filter( 'nav_menu_css_class', 'wp_less_is_more__filter__custom_nav_menu' );
+add_filter( 'nav_menu_item_id', 'wp_less_is_more__filter__custom_nav_menu' );
+add_filter( 'page_css_class', 'wp_less_is_more__filter__custom_nav_menu' );
 
 /**
  * Replaces "current-menu-item" with "active" - for bootstrap menu
  *
  * @since WP Less is More 1.0
  */
-function wp_less_is_more__filter__current_to_active( $classes ){
-		$replace = array(
-			//List of menu item classes that should be changed to "active"
-			'current-menu-item' 	=> 'active',
-			'current_page_item' 	=> 'item',
-			'current_page_parent' 	=> 'parent',
-			'current_page_ancestor' => 'ancestor',
-		);
-		$classes = str_replace( array_keys( $replace ), $replace, $classes );
-			return $classes;
-		}
-add_filter ( 'wp_nav_menu'		 ,	'wp_less_is_more__filter__current_to_active'	 );
+function wp_less_is_more__filter__current_to_active( $classes ) {
+	$replace = array(
+		//List of menu item classes that should be changed to "active"
+		'current-menu-item'     => 'active',
+		'current_page_item'     => 'item',
+		'current_page_parent'   => 'parent',
+		'current_page_ancestor' => 'ancestor',
+	);
+	$classes = str_replace( array_keys( $replace ), $replace, $classes );
+	return $classes;
+}
+add_filter( 'wp_nav_menu', 'wp_less_is_more__filter__current_to_active' );
 
 /**
  * Deletes empty classes and removes the sub menu class
@@ -202,10 +208,10 @@ add_filter ( 'wp_nav_menu'		 ,	'wp_less_is_more__filter__current_to_active'	 );
  * @since WP Less is More 1.0
  */
 function wp_less_is_more__filter__strip_empty_classes( $menu ) {
-    $menu = preg_replace( '/ class=""| class="sub-menu"/',' class="dropdown-menu"', $menu );
-    return $menu;
+	$menu = preg_replace( '/ class=""| class="sub-menu"/', ' class="dropdown-menu"', $menu );
+	return $menu;
 }
-add_filter ( 'wp_nav_menu'		 ,	'wp_less_is_more__filter__strip_empty_classes');
+add_filter( 'wp_nav_menu', 'wp_less_is_more__filter__strip_empty_classes' );
 
 /**
  * Add img-responsive class within the_content included post_thumbnails.
@@ -213,29 +219,30 @@ add_filter ( 'wp_nav_menu'		 ,	'wp_less_is_more__filter__strip_empty_classes');
  *
  * @param string $content Content of the current post.
  *
- *  Responsive images:
- * 	1) add img-responsive class
- * 	2) remove dimensions
+ * Responsive images:
+ * 1) add img-responsive class
+ * 2) remove dimensions
  *
  * @since WP Less is More 1.0
  */
-function wp_less_is_more__filter__bootstrap_responsive_images( $content ){
-  $classes = 'img-responsive'; // separated by spaces, e.g. 'img image-link'
+function wp_less_is_more__filter__bootstrap_responsive_images( $content ) {
+	// separated by spaces, e.g. 'img image-link'
+	$classes = 'img-responsive';
 
-  // check if there are already classes assigned to the anchor
-  if ( preg_match( '/<img.*? class="/', $content ) ) {
+	// check if there are already classes assigned to the anchor
+	if ( preg_match( '/<img.*? class="/', $content ) ) {
 
-    $content = preg_replace( '/(<img.*? class=".*?)(".*?\/>)/', '$1 ' . $classes . ' $2', $content );
+		$content = preg_replace( '/(<img.*? class=".*?)(".*?\/>)/', '$1 ' . $classes . ' $2', $content );
 
-  } else {
+	} else {
 
-    $content = preg_replace( '/(<img.*?)(\/>)/', '$1 class="' . $classes . '" $2', $content );
-  }
+		$content = preg_replace( '/(<img.*?)(\/>)/', '$1 class="' . $classes . '" $2', $content );
+	}
 
-  // remove dimensions from images,, does not need it!
-  $content = preg_replace( '/(width|height)=\"\d*\"\s/', "", $content );
+	// remove dimensions from images,, does not need it!
+	$content = preg_replace( '/(width|height)=\"\d*\"\s/', '', $content );
 
-  return $content;
+	return $content;
 }
 add_filter( 'the_content', 'wp_less_is_more__filter__bootstrap_responsive_images', 10 );
 
@@ -246,13 +253,11 @@ add_filter( 'the_content', 'wp_less_is_more__filter__bootstrap_responsive_images
  *
  * @since WP Less is More 1.1.2
  */
-
-function wp_less_is_more__filter__remove_width_and_height( $html )
-{
-    $html = preg_replace( '/ (width|height)="[^"]+"/', '', $html );
-    return $html;
+function wp_less_is_more__filter__remove_width_and_height( $html ) {
+	$html = preg_replace( '/ (width|height)="[^"]+"/', '', $html );
+	return $html;
 }
-add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__remove_width_and_height', 10 );
+add_filter( 'post_thumbnail_html', 'wp_less_is_more__filter__remove_width_and_height', 10 );
 
 /**
  * Hides post thumbnail if post password required
@@ -261,10 +266,12 @@ add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__remove_width_and_he
  *
  * @since WP Less is More 1.1.6
  */
-function wp_less_is_more__filter__hide_thumb_if_post_protected( $html ){
-	if ( ! post_password_required() ) return $html;
+function wp_less_is_more__filter__hide_thumb_if_post_protected( $html ) {
+	if ( ! post_password_required() ) {
+		return $html;
+	}
 }
-add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__hide_thumb_if_post_protected', 10 );
+add_filter( 'post_thumbnail_html', 'wp_less_is_more__filter__hide_thumb_if_post_protected', 10 );
 
 /**
  * Excerpt lenght
@@ -278,11 +285,13 @@ add_filter( 'post_thumbnail_html',	'wp_less_is_more__filter__hide_thumb_if_post_
 function wp_less_is_more__filter__excerpt_length( $length ) {
 
 	$_excerpt_length = wp_less_is_more__default_excerpt_length();
-	$excerpt_length = get_theme_mod( 'excerpt_length', $_excerpt_length );
+	$excerpt_length  = get_theme_mod( 'excerpt_length', $_excerpt_length );
 
-	if ( $excerpt_length == $_excerpt_length )
+	if ( $excerpt_length === $_excerpt_length ) {
 		return $_excerpt_length;
-	else return $excerpt_length;
+	} else {
+		return $excerpt_length;
+	}
 }
 add_filter( 'excerpt_length', 'wp_less_is_more__filter__excerpt_length', 999 );
 
@@ -296,31 +305,31 @@ add_filter( 'excerpt_length', 'wp_less_is_more__filter__excerpt_length', 999 );
  *
  * @since WP Less is More 1.1.1
 */
-
-function wp_less_is_more__filter__wp_link_pages_link( $link, $i ){
+function wp_less_is_more__filter__wp_link_pages_link( $link, $i ) {
 	global $page;
 
-	if ( !is_archive() AND $i === $page AND is_single() ) {
-    $link = '<button class="btn btn-default btn-xs disabled">' . $i . '</button>';
+	if ( ! is_archive() and $i === $page and is_single() ) {
+		$link = '<button class="btn btn-default btn-xs disabled">' . $i . '</button>';
 	}
 
 	return $link;
 }
 add_filter( 'wp_link_pages_link', 'wp_less_is_more__filter__wp_link_pages_link', 10, 2 );
 
-/** Navigation Markup Template **
+/**
+ * Navigation Markup Template
  *
  * Add extra class to navigation
  *
  * @since WP Less is More 1.1.6
  */
 function wp_less_is_more__filter__navigation_markup_template( $template, $class ) {
-    $template = '<nav class="navigation text-center center-block %1$s" role="navigation" aria-label="%4$s">
+	$template = '<nav class="navigation text-center center-block %1$s" role="navigation" aria-label="%4$s">
     <h2 class="screen-reader-text">%2$s</h2>
     <div class="nav-links">%3$s</div>
 </nav>';
-    return $template;
-};
+	return $template;
+}
 add_filter( 'navigation_markup_template', 'wp_less_is_more__filter__navigation_markup_template', 10, 2 );
 
 /**
@@ -333,12 +342,12 @@ add_filter( 'navigation_markup_template', 'wp_less_is_more__filter__navigation_m
  * @param string $link           Cancel comment reply link URL.
  * @param string $text           Cancel comment reply link text.
  */
-
 function wp_less_is_more__filter__cancel_comment_reply_link( $formatted_link, $link, $text ) {
 
-	$style = isset( $_GET['replytocom'] ) ? '' : ' style="display:none;"';
-    $formatted_link = '<a class="btn btn-sm btn-default" rel="nofollow" id="cancel-comment-reply-link" href="' . $link . '"' . $style . '><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;' . $text . '</a>';
-    return $formatted_link;
+	$style           = isset( $_GET['replytocom'] ) ? '' : ' style="display:none;"';
+	$formatted_link  = '<a class="btn btn-sm btn-default" rel="nofollow" id="cancel-comment-reply-link" href="' . $link . '"' . $style . '>';
+	$formatted_link .= '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;' . $text . '</a>';
+	return $formatted_link;
 }
 add_filter( 'cancel_comment_reply_link', 'wp_less_is_more__filter__cancel_comment_reply_link', 10, 3 );
 
@@ -351,13 +360,12 @@ add_filter( 'cancel_comment_reply_link', 'wp_less_is_more__filter__cancel_commen
  *
  * @since WP Less is More 1.1.6
  */
-
 function wp_less_is_more__filter__widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance ) {
-    $nav_menu_args = array(
-	'menu_class' => 'list-unstyled',
-    'walker'			=> new Wp_Less_Is_More_Bootstrap_Navwalker(),
-);
-    return $nav_menu_args;
+	$nav_menu_args = array(
+		'menu_class' => 'list-unstyled',
+		'walker'     => new Wp_Less_Is_More_Bootstrap_Navwalker(),
+	);
+	return $nav_menu_args;
 }
 add_filter( 'widget_nav_menu_args', 'wp_less_is_more__filter__widget_nav_menu_args', 10, 4 );
 
@@ -370,13 +378,95 @@ add_filter( 'widget_nav_menu_args', 'wp_less_is_more__filter__widget_nav_menu_ar
  *
  * @param array $cat_args An array of Categories widget drop-down arguments.
  */
-
 function wp_less_is_more__filter__widget_categories_dropdown_args( $cat_args ) {
-
 	$cat_args['class'] = 'form-control';
-    return $cat_args;
+	return $cat_args;
 }
 add_filter( 'widget_categories_dropdown_args', 'wp_less_is_more__filter__widget_categories_dropdown_args', 10, 1 );
+
+/**
+ * Filters a comment form field for display author.
+ *@since WP Less is More 1.1.9
+ */
+function wp_less_is_more__filter__comment_form_field_author() {
+
+	$commenter = wp_get_current_commenter();
+	$collapse  = isset( $_GET['replytocom'] ) ? '' : 'collapse';
+	$req       = get_option( 'require_name_email' ) ? ' aria-required="true" required' : '';
+	?>
+<div id="form-input" class="<?php echo esc_attr( $collapse ); ?> row"><br><div class="col-xs-8 col-sm-4">
+	<div class="form-group">
+		<div class="input-group">
+			<span class="input-group-addon" data-toggle="tooltip" data-placement="top" title="<?php esc_attr_e( 'Nick name required', 'wp-less-is-more' ); ?>">
+			<span class="glyphicon glyphicon-user text-muted" aria-hidden="true"></span> *</span>
+			<span class="sr-only"><?php esc_html_e( 'nick name (required):', 'wp-less-is-more' ); ?></span>
+			<?php
+			printf(
+				'<input id="author" class="form-control input-sm" name="author" type="text" value="%s" placeholder="%s" %s>',
+				esc_attr( $commenter['comment_author'] ),
+				esc_attr__( 'nick name (req)', 'wp-less-is-more' ),
+				( get_option( 'require_name_email' ) ? 'required="true"' : '' )
+			);
+			?>
+		</div>
+	</div>
+</div>
+	<?php
+}
+add_filter( 'comment_form_field_author', 'wp_less_is_more__filter__comment_form_field_author' );
+
+/**
+ * Filters a comment form field for display email.
+ *@since WP Less is More 1.1.9
+ */
+function wp_less_is_more__filter__comment_form_field_email() {
+	$commenter = wp_get_current_commenter();
+	?>
+<div class="col-xs-8 col-sm-4">
+	<div class="form-group">
+		<div class="input-group">
+		<span class="input-group-addon" data-toggle="tooltip" data-placement="bottom" title="<?php esc_attr_e( 'Email required', 'wp-less-is-more' ); ?>">@ *</span>
+		<span class="sr-only"><?php esc_html_e( 'email (required):', 'wp-less-is-more' ); ?></span>
+		<?php
+		printf(
+			'<input id="email" class="form-control input-sm" name="email" type="email" value="%s" placeholder="%s" aria-describedby="email-notes" %s>',
+			esc_attr( $commenter['comment_author_email'] ),
+			esc_attr__( 'email (req)', 'wp-less-is-more' ),
+			( get_option( 'require_name_email' ) ? 'required="true"' : '' )
+		);
+		?>
+		</div>
+	</div>
+</div>
+	<?php
+}
+add_filter( 'comment_form_field_email', 'wp_less_is_more__filter__comment_form_field_email' );
+
+/**
+ * Filters a comment form field for display url.
+ *@since WP Less is More 1.1.9
+ */
+function wp_less_is_more__filter__comment_form_field_url() {
+	return '';
+}
+add_filter( 'comment_form_field_url', 'wp_less_is_more__filter__comment_form_field_url' );
+
+/**
+ * Filters a comment form field for display cookies.
+ * @since WP Less is More 1.1.9
+ */
+function wp_less_is_more__filter__comment_form_field_cookies() {
+	?>
+<div class="col-xs-8 col-sm-4">
+	<div class="checkbox" style="margin-top:0">
+		<label for="wp-comment-cookies-consent">
+			<input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"><?php esc_html_e( 'Remember me', 'wp-less-is-more' ); ?>
+		</label>
+		<span data-toggle="tooltip" data-placement="top" title="<?php esc_attr_e( 'Your data will be stored in this browser and added automaticly so next time you don\'t need to put it again.', 'wp-less-is-more' ); ?>" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+	</div>
+	<?php
+}
+add_filter( 'comment_form_field_cookies', 'wp_less_is_more__filter__comment_form_field_cookies' );
 
 /**
  * Actions HOOK
@@ -384,26 +474,25 @@ add_filter( 'widget_categories_dropdown_args', 'wp_less_is_more__filter__widget_
  */
 
 if ( ! function_exists( 'wp_body_open' ) ) {
-    /**
-     * Fire the wp_body_open action.
-     *
-     * Added for backwards compatibility to support WordPress versions prior to 5.2.0.
-     */
-    function wp_body_open() {
-        /**
-         * Triggered after the opening <body> tag.
-         */
-        do_action( 'wp_body_open' );
-    }
+	/**
+	 * Fire the wp_body_open action.
+	 *
+	 * Added for backwards compatibility to support WordPress versions prior to 5.2.0.
+	 */
+	function wp_body_open() {
+		/**
+		 * Triggered after the opening <body> tag.
+		 */
+		do_action( 'wp_body_open' );
+	}
 }
 
 /**
  * Include a skip to content link at the top of the page so that users can bypass the menu.
  */
 function wp_less_is_more__action__skip_link() {
-	echo '<a class="skip-link screen-reader-text" href="#site-content">' . __( 'Skip to the content', 'wp-less-is-more' ) . '</a>';
+	echo '<a class="skip-link screen-reader-text" href="#site-content">' . esc_html__( 'Skip to the content', 'wp-less-is-more' ) . '</a>';
 }
-
 add_action( 'wp_body_open', 'wp_less_is_more__action__skip_link', 5 );
 
 /**
@@ -412,102 +501,105 @@ add_action( 'wp_body_open', 'wp_less_is_more__action__skip_link', 5 );
  * @link https://developer.wordpress.org/reference/functions/register_sidebar/
  *
  *
- * 	You've got four widgets area
- * 	1) on the left bottom side of the site
- * 	2) in the left middle - bottom
- * 	3) in the right bottom side
- *   4) on the right bottom side
+ * You've got four widgets area
+ * 1) on the left bottom side of the site
+ * 2) in the left middle - bottom
+ * 3) in the right bottom side
+ * 4) on the right bottom side
  *
  * @since WP Less is More 1.0
  *
  */
-
 function wp_less_is_more__action__widgets_init() {
-	register_sidebar( array(
-		'name'			=> __( 'Left Bottom Widget Area', 'wp-less-is-more' ),
-		'id'			=> 'sidebar-left',
-		'description'	=> __( 'Appears on the left-bottom side of the page.', 'wp-less-is-more' ),
-		'before_widget'	=> '<div class="widget-content">',
-		'after_widget'	=> '</div>',
-		'before_title'	=> '<h3 class="widget-title subheading heading-size-3">',
-		'after_title'	=> '</h3>',
-	) );
-	register_sidebar( array(
-		'name'			=> __( 'Middle Left  Bottom Widget Area', 'wp-less-is-more' ),
-		'id'			=> 'sidebar-middle-left',
-		'description'	=> __( 'Appears on the middle-bottom side of the page.', 'wp-less-is-more' ),
-		'before_widget'	=> '<div class="widget-content">',
-		'after_widget'	=> '</div>',
-		'before_title'	=> '<h3>',
-		'after_title'	=> '</h3>',
-	) );
-	register_sidebar( array(
-		'name'			=> __( 'Middle Right Bottom Widget Area', 'wp-less-is-more' ),
-		'id'			=> 'sidebar-middle-right',
-		'description'	=> __( 'Appears on the right-bottom side of the page.', 'wp-less-is-more' ),
-		'before_widget'	=> '<div class="widget-content">',
-		'after_widget'	=> '</div>',
-		'before_title'	=> '<h3>',
-		'after_title'	=> '</h3>',
-	) );
-	register_sidebar( array(
-		'name'			=> __( 'Right Bottom Widget Area', 'wp-less-is-more' ),
-		'id'			=> 'sidebar-right',
-		'description'	=> __( 'Appears on the right-bottom side of the page.', 'wp-less-is-more' ),
-		'before_widget'	=> '<div class="widget-content">',
-		'after_widget'	=> '</div>',
-		'before_title'	=> '<h3>',
-		'after_title'	=> '</h3>',
-	) );
-
+	register_sidebar(
+		array(
+			'name'          => __( 'Left Bottom Widget Area', 'wp-less-is-more' ),
+			'id'            => 'sidebar-left',
+			'description'   => __( 'Appears on the left-bottom side of the page.', 'wp-less-is-more' ),
+			'before_widget' => '<div class="widget-content">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3 class="widget-title subheading heading-size-3">',
+			'after_title'   => '</h3>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => __( 'Middle Left  Bottom Widget Area', 'wp-less-is-more' ),
+			'id'            => 'sidebar-middle-left',
+			'description'   => __( 'Appears on the middle-bottom side of the page.', 'wp-less-is-more' ),
+			'before_widget' => '<div class="widget-content">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3>',
+			'after_title'   => '</h3>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => __( 'Middle Right Bottom Widget Area', 'wp-less-is-more' ),
+			'id'            => 'sidebar-middle-right',
+			'description'   => __( 'Appears on the right-bottom side of the page.', 'wp-less-is-more' ),
+			'before_widget' => '<div class="widget-content">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3>',
+			'after_title'   => '</h3>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => __( 'Right Bottom Widget Area', 'wp-less-is-more' ),
+			'id'            => 'sidebar-right',
+			'description'   => __( 'Appears on the right-bottom side of the page.', 'wp-less-is-more' ),
+			'before_widget' => '<div class="widget-content">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3>',
+			'after_title'   => '</h3>',
+		)
+	);
 }
 add_action( 'widgets_init', 'wp_less_is_more__action__widgets_init' );
-
-
 
 /**
  *  Enqueue scripts and styles.
  *
  * @since WP Less is More 1.0
  */
-
 function wp_less_is_more__action__enqueue_js_and_css() {
 
 	$theme_version = wp_get_theme()->get( 'Version' );
 
 	wp_enqueue_script( 'bootstrap', get_stylesheet_directory_uri() . '/bootstrap/js/bootstrap.min.js', array( 'jquery' ), '3.4.1', false );
-
 	wp_enqueue_style( 'bootstrap', get_stylesheet_directory_uri() . '/bootstrap/css/bootstrap.min.css', false, '3.4.1', 'all' );
 
-
 	wp_enqueue_style( 'bootstrap-joombotron-narrow', get_stylesheet_directory_uri() . '/bootstrap/css/jumbotron-narrow.min.css', false, '3.4.1', 'all' );
-
-	wp_enqueue_style( 'wp-less-is-more-style',	get_stylesheet_directory_uri() . '/style.css', false, $theme_version, 'all' );
+	wp_enqueue_style( 'wp-less-is-more-style', get_stylesheet_directory_uri() . '/style.css', false, $theme_version, 'all' );
 
 	/*
-	* HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-	*
-	*/
-
-	wp_enqueue_script( 'html5shiv', get_template_directory_uri() . '/bootstrap/js/html5shiv.min.js',   false, null, true );
-	wp_enqueue_script( 'respond',	 get_template_directory_uri() . '/bootstrap/js/respond.min.js',	false, null, true );
+	 * HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+	 *
+	 */
+	wp_enqueue_script( 'html5shiv', get_template_directory_uri() . '/bootstrap/js/html5shiv.min.js', false, null, true );
+	wp_enqueue_script( 'respond', get_template_directory_uri() . '/bootstrap/js/respond.min.js', false, null, true );
 
 	wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
-	wp_script_add_data( 'respond',   'conditional', 'lt IE 9' );
+	wp_script_add_data( 'respond', 'conditional', 'lt IE 9' );
 
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' )  ){
-	wp_enqueue_script( 'comment-reply' );
-	/*
-	 * Allowed_tags popover, tooltip and autoheight comment textarea trigger handler
-	 * @since WP Less is More 1.1.7
-	 */
-		wp_enqueue_script ( 'wp-less-is-more-popover',	 get_template_directory_uri() . '/js/wp-less-is-more-popover.min.js', array('jquery'), null, true );
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+		/*
+		* Allowed_tags popover, tooltip and autoheight comment textarea trigger handler
+		* @since WP Less is More 1.1.7
+		*/
+		wp_enqueue_script( 'wp-less-is-more-popover', get_template_directory_uri() . '/js/wp-less-is-more-popover.min.js', array( 'jquery' ), null, true );
 		// Add allowet tags to localize_script
-		wp_localize_script( 'wp-less-is-more-popover', 'wp_less_is_more_popover', array(
-			'allowed_tags' => htmlspecialchars( allowed_tags() ),
-			'commenttextfocus' => ( isset( $_GET['replytocom'] ) ) ? true:false,
-		));
+		wp_localize_script(
+			'wp-less-is-more-popover',
+			'wp_less_is_more_popover',
+			array(
+				'allowed_tags'     => htmlspecialchars( allowed_tags() ),
+				'commenttextfocus' => ( isset( $_GET['replytocom'] ) ) ? true : false,
+			)
+		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'wp_less_is_more__action__enqueue_js_and_css' );
@@ -517,9 +609,14 @@ add_action( 'wp_enqueue_scripts', 'wp_less_is_more__action__enqueue_js_and_css' 
  *
  * @since WP Less is More 1.1.1
  */
-
 function wp_less_is_more__action__customize_enqueue_js() {
-	wp_enqueue_script( 'wp-less-is-more-custom-customize', get_template_directory_uri() . '/inc/customizer/js/wp_less_is_more_show_if_checked.js', array( 'jquery', 'customize-controls' ), false, true );
+	wp_enqueue_script(
+		'wp-less-is-more-custom-customize',
+		get_template_directory_uri() . '/inc/customizer/js/wp_less_is_more_show_if_checked.js',
+		array( 'jquery', 'customize-controls' ),
+		false,
+		true
+	);
 }
 add_action( 'customize_controls_enqueue_scripts', 'wp_less_is_more__action__customize_enqueue_js' );
 
@@ -528,42 +625,36 @@ add_action( 'customize_controls_enqueue_scripts', 'wp_less_is_more__action__cust
  *
  * This function changes the way you see (in header section)
  * your site tile (or blog name), depends on different pages
- * See line: 27 in header.php file
+ * See line: 43 in header.php file
  *
- * @echo string $site_title
+ * @return string
  *
  * @since WP Less is More 1.1.0.8
  */
-
-function wp_less_is_more__site_title(){
+function wp_less_is_more__site_title() {
 
 	// if there is attachment page display: Attachment
 	if ( is_attachment() ) {
-
-		$site_title =  __( 'Attachment', 'wp-less-is-more');
+		return esc_html__( 'Attachment', 'wp-less-is-more' );
 	}
-		// if there is author page display: Author + author name
-		elseif ( is_author()   ) {
 
-			$site_title =  __( 'Author:', 'wp-less-is-more') . ' ' . get_the_author();
-		}
-			// if there is archive display: Archive
-			elseif ( is_archive()  ) {
+	// if there is author page display: Author + author name
+	if ( is_author() ) {
+		return esc_html__( 'Author:', 'wp-less-is-more' ) . ' ' . get_the_author();
+	}
 
-				$site_title =  __( 'Archive', 'wp-less-is-more');
-			}
+	// if there is archive display: Archive
+	if ( is_archive() ) {
+		return esc_html__( 'Archive', 'wp-less-is-more' );
+	}
 
-				// if there is custom page templete used display page title
-				elseif( is_page_template( 'templates/page_list-child-pages.php' ) ) {
+	// if there is custom page templete used display page title
+	if ( is_page_template( 'templates/page_list-child-pages.php' ) ) {
+		return get_the_title();
+	}
 
-					$site_title =  the_title();
-				}
-					// in other any cases display hyperlinked blog name
-					else {
-
-						$site_title =  get_bloginfo( 'name' );
-					}
-	echo $site_title;
+	// in other any cases display site title (set in Settings > General)
+	return  get_bloginfo( 'name' );
 }
 
 /**
@@ -575,40 +666,52 @@ function wp_less_is_more__site_title(){
  *
  * @since WP Less is More 1.1.4
  */
-
-function wp_less_is_more__taxonomy_title(){
+function wp_less_is_more__taxonomy_title() {
 	global $wp_query;
 
-	$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
 	if ( is_tag() || is_category() ) {
-
-	$output = '<ol class="breadcrumb">';
-	$output .= '<li class="active">';
+		?>
+<ol class="breadcrumb">
+<li class="active">
+		<?php
 
 		if ( is_tag() ) {
-
-		 $output .= __( 'Posts tagged with' , 'wp-less-is-more' );
+			esc_html_e( 'Posts tagged with', 'wp-less-is-more' );
 		}
 
 		if ( is_category() ) {
-
-		$output .= __( 'Posts in category', 'wp-less-is-more' );
+			esc_html_e( 'Posts in category', 'wp-less-is-more' );
 		}
+		?>
+</li>
+<li><a href="#"><?php single_tag_title( '', true ); ?></a></li>
+		<?php
 
-	$output .= '</li>';
-	$output .= '<li><a href="#">' . single_tag_title( '', false ) . '</a> </li>';
+		/**
+		 * Page number text
+		 * @since 1.1.6
+		 */
+		if ( $wp_query->max_num_pages > 1 ) {
+			?>
+<li><span class="badge">
+			<?php
 
-/*
- * Page number text
- * @since 1.1.6
- */
-	if ( $wp_query->max_num_pages > 1 )
-	$output .= '<li><span class="badge">' . sprintf( __( 'page %s', 'wp-less-is-more' ), $paged ) . '</span></li>';
-	$output .= '</ol>';
+			printf(
+				/* translators: %s: Page number in pagination */
+				esc_html__( 'page %s', 'wp-less-is-more' ),
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				$paged
+			);
 
-	echo $output;
-
+			?>
+</span></li>
+			<?php
+		}
+		?>
+</ol>
+		<?php
 	}
 }
 
@@ -619,15 +722,13 @@ function wp_less_is_more__taxonomy_title(){
  *
  * @since WP Less is More 1.1.1
  */
-
-function wp_less_is_more__custom_footer_text(){
+function wp_less_is_more__custom_footer_text() {
 
 	$custom_footer_text = get_theme_mod( 'custom_footer_text', wp_less_is_more__default_footer_text() );
 
-	$text = wp_less_is_more__sanitize_text( $custom_footer_text );
-
-		if ( get_theme_mod( 'display_footer_text', 1 ) )
-	 echo $text;
+	if ( get_theme_mod( 'display_footer_text', 1 ) ) {
+		echo wp_less_is_more__sanitize_text( $custom_footer_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in wp_less_is_more__sanitize_text()
+	}
 }
 
 /**
@@ -640,40 +741,51 @@ function wp_less_is_more__custom_footer_text(){
  *
  * @since: WP Less is More 1.1.4
  */
+function wp_less_is_more__entry_meta() {
 
-function wp_less_is_more__entry_meta(){
+	if ( get_theme_mod( 'entry_meta', 1 ) ) {
 
-	if( get_theme_mod( 'entry_meta', 1 ) ){
-
-	if( has_tag() ) { ?>
-<p title="<?php esc_attr_e( 'hashtags - tags - keywords', 'wp-less-is-more' ); ?>"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span><span class="sr-only"><?php _e( 'Tagged with:', 'wp-less-is-more' ); ?></span>&ensp;<?php the_tags( '', ', ', '' ); ?></p><?php } ?>
+		if ( has_tag() ) {
+			?>
+<p title="<?php esc_attr_e( 'hashtags - tags - keywords', 'wp-less-is-more' ); ?>"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span><span class="sr-only"><?php esc_html_e( 'Tagged with:', 'wp-less-is-more' ); ?></span>&ensp;<?php the_tags( '', ', ', '' ); ?></p><?php } ?>
 
 <p class="post_author vcard author post_date post_modified_dat">
 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-<span class="sr-only"><?php _e( 'Written by', 'wp-less-is-more' ); ?></span>
-<span class="fn" title="<?php esc_attr_e( 'Written by', 'wp-less-is-more' ); ?>"><?php the_author_link() ?></span>&emsp;
+<span class="sr-only"><?php esc_html_e( 'Written by', 'wp-less-is-more' ); ?></span>
+<span class="fn" title="<?php esc_attr_e( 'Written by', 'wp-less-is-more' ); ?>"><?php the_author_link(); ?></span>&emsp;
 
 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-<span class="sr-only"><?php _e( 'Published', 'wp-less-is-more' ); ?></span>
+<span class="sr-only"><?php esc_html_e( 'Published', 'wp-less-is-more' ); ?></span>
 <time class="entry-date updated" title="<?php esc_attr_e( 'Published', 'wp-less-is-more' ); ?>"><?php the_date(); ?></time>&emsp;
-<?php  /* Check if post has update */
-if( get_the_modified_date() != get_the_date() ) : ?>
+		<?php
+		/* Check if post has update */
+		if ( get_the_modified_date() !== get_the_date() ) :
+			?>
 <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-<span class="sr-only"><?php _e( 'Last update', 'wp-less-is-more' ); ?></span>
+<span class="sr-only"><?php esc_html_e( 'Last update', 'wp-less-is-more' ); ?></span>
 <time class="entry-date updated" title="<?php esc_attr_e( 'Last update', 'wp-less-is-more' ); ?>"><?php the_modified_date(); ?></time>&emsp;
 <?php endif; ?>
 
-<span class="text-right glyphicon glyphicon-folder-open" aria-hidden="true" title=" <?php esc_attr_e( 'Category', 'wp-less-is-more' ); ?>"></span><span class="sr-only"><?php _e( 'Category', 'wp-less-is-more' ); ?></span>&ensp;<span class="category"  title=" <?php esc_attr_e( 'Category', 'wp-less-is-more' ); ?>"><?php the_category( '&ensp;&bullet;&ensp;' ); ?></span></p>
+<span class="text-right glyphicon glyphicon-folder-open" aria-hidden="true" title=" <?php esc_attr_e( 'Category', 'wp-less-is-more' ); ?>"></span><span class="sr-only"><?php esc_html_e( 'Category', 'wp-less-is-more' ); ?></span>&ensp;<span class="category"  title=" <?php esc_attr_e( 'Category', 'wp-less-is-more' ); ?>"><?php the_category( '&ensp;&bullet;&ensp;' ); ?></span></p>
 
-	<?php } else {
+		<?php
+	} else {
 
-?><p><?php the_tags( __( 'Tagged with:&nbsp;', 'wp-less-is-more' ), ', ', '<br />' ); ?></p>
-<p><?php _e( 'Category:&nbsp;', 'wp-less-is-more' ); the_category( ' | ' ); ?></p>
-<p class="post_author vcard author post_date post_modified_date"><?php _e( 'Written by:&nbsp;', 'wp-less-is-more' ); ?><span class="fn"><?php the_author_link(); ?></span> &diams; <?php _e( 'Published:', 'wp-less-is-more' ); ?> <time class="entry-date updated"><?php the_date(); ?></time>
-<?php  /* Check if post has update */
-if( get_the_modified_date() != get_the_date() ) : ?> &diams; <?php _e( 'Last update:', 'wp-less-is-more' ); ?> <time class="entry-date updated"><?php the_modified_date(); ?></time><?php endif; ?></p>
-<?php }
-
+		?>
+<p><?php the_tags( __( 'Tagged with:&nbsp;', 'wp-less-is-more' ), ', ', '<br />' ); ?></p>
+<p><?php esc_html_e( 'Category:&nbsp;', 'wp-less-is-more' ); ?> <?php the_category( ' | ' ); ?></p>
+<p class="post_author vcard author post_date post_modified_date"><?php esc_html_e( 'Written by:', 'wp-less-is-more' ); ?>&nbsp;<span class="fn"><?php the_author_link(); ?></span> &diams; <?php esc_html_e( 'Published:', 'wp-less-is-more' ); ?> <time class="entry-date updated"><?php the_date(); ?></time>
+		<?php
+		/* Check if post has update */
+		if ( get_the_modified_date() !== get_the_date() ) :
+			?>
+		&diams; <?php esc_html_e( 'Last update:', 'wp-less-is-more' ); ?> <time class="entry-date updated"><?php the_modified_date(); ?></time>
+			<?php
+		endif;
+		?>
+		</p>
+		<?php
+	}
 }
 
 /**
@@ -684,17 +796,17 @@ if( get_the_modified_date() != get_the_date() ) : ?> &diams; <?php _e( 'Last upd
  * @return @html
  *
  * @since WP Less is More 1.1.5
- **/
+ */
+function wp_less_is_more__sticky_pin() {
 
-function wp_less_is_more__sticky_pin(){
-
-	if ( is_sticky() ) :
-
-	$url =  get_template_directory_uri() . '/img/pin.svg';
-
-?><img class="pull-right" style="position:relative;top:-0.5rem" width="28" src="<?php echo esc_url( $url ); ?>" alt="<?php esc_attr_e( 'Sticky pin', 'wp-less-is-more' );?>">
-<?php endif;
+	if ( is_sticky() ) {
+		$url = get_template_directory_uri() . '/img/pin.svg';
+		?>
+<img class="pull-right" style="position:relative;top:-0.5rem" width="28" src="<?php echo esc_url( $url ); ?>" alt="<?php esc_attr_e( 'Sticky pin', 'wp-less-is-more' ); ?>">
+		<?php
+	}
 }
+
 /**
  * Post Password Protected handle
  *
@@ -705,11 +817,13 @@ function wp_less_is_more__sticky_pin(){
  * @since WP Less is More 1.1.6
  */
 
-function wp_less_is_more__password_protcted(){
+function wp_less_is_more__password_protcted() {
 
-	if ( post_password_required() ) :
-
-?><span style="font-size:80%" class="glyphicon glyphicon-lock <?php ( is_singular() ) ? esc_attr('text-primary') : ''; ?>" aria-hidden="true"></span>&thinsp;<?php endif;
+	if ( post_password_required() ) {
+		?>
+<span style="font-size:80%" class="glyphicon glyphicon-lock <?php ( is_singular() ) ? esc_attr( 'text-primary' ) : ''; ?>" aria-hidden="true"></span>&thinsp;
+		<?php
+	}
 }
 
 /**
@@ -720,16 +834,16 @@ function wp_less_is_more__password_protcted(){
  *
  * @since WP Less is More 1.1.6
  **/
+function wp_less_is_more__custom_header() {
 
-function wp_less_is_more__custom_header(){
+	if ( get_custom_header()->url ) {
 
-	if ( get_custom_header()->url ) { ?>
-
-<header id="masthead" class="site-header" role="banner"><img alt="<?php echo bloginfo( 'name' ); ?>" title="<?php echo bloginfo( 'description' ); ?>" src="<?php header_image(); ?>" class="img-responsive center-block" height="<?php
-echo get_custom_header()->height;
-?>" width="<?php echo get_custom_header()->width; ?>"/></header>
-
-<?php  }
+		?>
+<header id="masthead" class="site-header" role="banner">
+	<img alt="<?php echo bloginfo( 'name' ); ?>" title="<?php echo bloginfo( 'description' ); ?>" src="<?php header_image(); ?>" class="img-responsive center-block" height="<?php echo esc_attr( get_custom_header()->height ); ?>" width="<?php echo esc_attr( get_custom_header()->width ); ?>"/>
+</header>
+		<?php
+	}
 }
 
 /**
@@ -737,27 +851,29 @@ echo get_custom_header()->height;
  * Show current page number under the top menu on home.php template
  * if there is nth(n) page in pagination but not on archive page
  *
- * @var @paged 	Current Pagination Number
+ * @var @paged Current Pagination Number
  * @return @html
  *
  * @since WP Less is More 1.1.6
  */
+function wp_less_is_more__current_page_number() {
 
-function wp_less_is_more__current_page_number(){
-
-	$paged = get_query_var('paged');
-
-	if ( $paged AND ! is_archive() ) { ?>
-
-<p style="cursor:help" class="badge bg-red" title="<?php _e( 'Current page number', 'wp-less-is-more') ;?>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;<?php
-
-$paged = ( $paged ) ? $paged : 1;
-
-printf(
-	/* translators: %s: page number in pagination */
-	__( 'Page №%s', 'wp-less-is-more' ), $paged ); ?>
+	$paged = get_query_var( 'paged' );
+	if ( $paged and ! is_archive() ) {
+		?>
+<p style="cursor:help" class="badge bg-red" title="<?php esc_attr_e( 'Current page number', 'wp-less-is-more' ); ?>">
+<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;
+		<?php
+		$paged = ( $paged ) ? $paged : 1;
+		printf(
+			/* translators: %s: page number in pagination */
+			esc_html__( 'Page №%s', 'wp-less-is-more' ),
+			$paged // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		); 
+		?>
 </p>
-<?php }
+		<?php
+	}
 }
 
 /**
@@ -767,26 +883,23 @@ printf(
  *
  * @since WP Less is More 1.1.7
  */
-
-function wp_less_is_more__comment_legend(){
+function wp_less_is_more__comment_legend() {
 	//Show comment legenf text if omments_open()
-	if ( comments_open() ){
-
- // Don't show comment legenf text if comment_registration option is on and user is not logged in
-		if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ){
+	if ( comments_open() ) {
+		// Don't show comment legenf text if comment_registration option is on and user is not logged in
+		if ( ! is_user_logged_in() && get_option( 'comment_registration' ) ) {
 			return;
 		}
-
-	$output = '<hr style="margin-top:0">';
-	$output .= '<div class="popoverContainer" style="position:relative">';
-	$output .=  '<p class="small">';
-	$output .= __( '*) Required fields are marked with star', 'wp-less-is-more' ) . '<br>';
-	$output .=  _x( '**) You can use some', 'comment legend part1', 'wp-less-is-more' );
-	$output .= '<button title="' . esc_attr__( 'Alowed HTML tags and attributes', 'wp-less-is-more' ) . '" type="button" class="triggerpopover btn btn-xs btn-link" data-toggle="popover" data-placement="top" role="button">';
-	$output .= _x( 'HTML markup', 'comment legend part2 (button text)', 'wp-less-is-more' );
-	$output .= '<span class="caret"></span></button></p>';
-	$output .= '</div>';
-
-	return $output;
+		?>
+<hr style="margin-top:0">
+	<div class="popoverContainer" style="position:relative">
+	<p class="small"><?php esc_html_e( '*) Required fields are marked with star', 'wp-less-is-more' ); ?> <br>
+		<?php
+		echo esc_html_x( '**) You can use some', 'comment legend part1', 'wp-less-is-more' );
+		?>
+	<a title="<?php esc_attr_e( 'Alowed HTML tags and attributes', 'wp-less-is-more' ); ?>" data-trigger="hover" class="triggerpopover" data-toggle="popover" data-placement="top" role="button"> <?php echo esc_html_x( 'HTML markup', 'comment legend part2 (button text)', 'wp-less-is-more' ); ?>	<span class="glyphicon glyphicon-hand-left"></span></a>
+	</p>
+	</div>
+		<?php
 	}
 }

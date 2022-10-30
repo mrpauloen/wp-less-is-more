@@ -2,9 +2,9 @@
 Theme Name: WP Less is More
 Theme URI: https://github.com/mrpauloen/wp-less-is-more
 Author: mrpauloen
-Author URI: https://github.com/mrpauloen
+Author URI: https://profiles.wordpress.org/mrpauloen/
 Description: Based on the popular Bootstrap 3 library, this theme shows how mobile friendly CSS framework can be used to create sleek, simple, fast and functional websites, with ease and intuitive way in modern front-end web developmen days.
-Version: 1.1.8
+Version: 1.1.9
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 7.0
@@ -55,7 +55,6 @@ Domain Path: /languages
  * Licence: CC-BY-SA 4.0
  * Licence URI: https://creativecommons.org/licenses/by-sa/4.0/
 
-
 *! Bootstrap v3.4.1 (http://getbootstrap.com)
  * (e.g. bootstrap.js, bootstrap.css jumbotron-narrow.css as well as fonts folder)
  * Copyright 2011-2019 Twitter, Inc.
@@ -68,7 +67,6 @@ Domain Path: /languages
  * Licenses: 	MIT/GPL2
  * Source: 		https://github.com/aFarkas/html5shiv
  *
-
 
 *! Respond.js v1.4.2: min/max-width media query polyfill
  * Copyright 2013 Scott Jehl

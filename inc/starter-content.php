@@ -15,79 +15,70 @@
 function wp_less_is_more__get_starter_content() {
 
 	$starter_content = array(
-
-		'options' => array(
+		'options'   => array(
 			'blogdescription' => _x( 'This is the Tagline... a short description of your website.', 'Theme starter content', 'wp-less-is-more' ),
 		),
-
-		'widgets' => array(
-
-			'sidebar-left' => array(
+		'widgets'   => array(
+			'sidebar-left'         => array(
 				'text_about',
 			),
-			'sidebar-middle-left' => array(
+			'sidebar-middle-left'  => array(
 				'calendar',
-				),
+			),
 			'sidebar-middle-right' => array(
 				'text_business_info',
-			),	
-			'sidebar-right' => array(
+			),
+			'sidebar-right'        => array(
 				'meta',
-			)
-
+			),
 		),
-
-
-		'posts' => array(
-			'home' => array(
+		'posts'     => array(
+			'home'    => array(
 				'post_type' => 'page',
 			),
-			'about' => array(
+			'about'   => array(
 				'post_type' => 'page',
 			),
 			'contact' => array(
 				'post_type' => 'page',
 			),
-			'blog' => array(
+			'blog'    => array(
 				'post_type' => 'page',
 			),
-			'news' => array(
-				'post_type' => 'page',
-				'post_title' => _x( 'News', 'Theme starter content', 'wp-less-is-more' ),
+			'news'    => array(
+				'post_type'    => 'page',
+				'post_title'   => _x( 'News', 'Theme starter content', 'wp-less-is-more' ),
 				'post_content' => _x( 'News content.', 'Theme starter content', 'wp-less-is-more' ),
 			),
-
 		),
-
 		'nav_menus' => array(
-			'top' => array(
-				'name' => _x( 'Top Menu', 'Theme starter content', 'wp-less-is-more' ),
+			'top'    => array(
+				'name'  => _x( 'Top Menu', 'Theme starter content', 'wp-less-is-more' ),
 				'items' => array(
 					'link_home',
 					'page_about',
 					'page_contact',
-					
 				),
 			),
 			'bottom' => array(
-				'name' => _x( 'Bottom Menu', 'Theme starter content', 'wp-less-is-more' ),
-					'items' => array(
-						'link_facebook',
-						'link_twitter',
-						'link_instagram',
-						'link_github' => array(
-							'url' => 'https://github.com',
-							),
-						'link_youtube' => array(
-							'url' => 'https://youtube.com',
-							),
-						'link_other' => array(
-							'title' => _x( 'Other', 'Theme starter content', 'wp-less-is-more' ),
-							'url' => '#',
-							'description' => _x( 'Short description', 'Theme starter content', 'wp-less-is-more' ),
-							),
-						),
+				'name'  => _x( 'Bottom Menu', 'Theme starter content', 'wp-less-is-more' ),
+				'items' => array(
+					'link_facebook',
+					'link_twitter',
+					'link_instagram',
+					'link_github'  => array(
+						'url' => 'https://github.com',
 					),
+					'link_youtube' => array(
+						'url' => 'https://youtube.com',
+					),
+					'link_other'   => array(
+						'title'       => _x( 'Other', 'Theme starter content', 'wp-less-is-more' ),
+						'url'         => '#',
+						'description' => _x( 'Short description', 'Theme starter content', 'wp-less-is-more' ),
+					),
+				),
+			),
 		),
 	);
 
