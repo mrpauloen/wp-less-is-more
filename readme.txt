@@ -1,13 +1,13 @@
 == WP Less is More ==
 Editors: mrpauloen
-Contributors: miccweb, @szepeviktor
-Requires at least: 5.0
+Contributors: miccweb, szepeviktor
+Requires at least: 5.5
 Requires PHP: 7.0
 Tested up to: 6.0
-Version: 1.1.8
-License: GPLv2 or later
+Version: 1.1.9
+License: GPL-2.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: responsive-layout, mobile-ready, light, white, narrow, one-column, custom-menu, custom-background, custom-header, custom-logo, editor-style, footer-widgets, featured-images, sticky-post, post-formats, theme-options, threaded-comments, translation-ready, blog, e-commerce, entertainment, portfolio
+Tags: responsive-layout, mobile-ready, light, white, narrow, one-column, custom-menu, custom-background, custom-header, custom-logo, editor-style, footer-widgets, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, blog, e-commerce, entertainment, portfolio
 
 == Description ==
 
@@ -135,15 +135,43 @@ Widges are in responsive columns. Preview shown on screenshot.
 
 == Support ==
 
-To contact with me, use facebook fanpage:
-https://www.facebook.com/WPSolucje/
-or better use official WordPress support forum on theme forums:
+If there is something you don't understand, please use official WordPress support forum on theme forums:
 https://wordpress.org/support/theme/wp-less-is-more
+
+
+== Contribute ==
+
+Are you familiar with github? Great! Use it as an extended support for reporting any bugs, keep track of tasks, propose enhancements or contributing to project.
+https://github.com/mrpauloen/wp-less-is-more
+
+== Upgrade ==
+
+If you are interested in making major changes or looking for paid help, write me a message to fanpage, or just simple create a new (separate) thread on the support forum.
+https://www.facebook.com/WPSolucje/
+
+== Components ==
+
+If you want to beautify your theme using the ready-made CSS, HTML and JS components, go to the official Bootstrap 3 Documentation site.
+https://getbootstrap.com/docs/3.4/components/
+
+== Some improvements comming soon! :) ==
+
 
 == Changelog ==
 
+=== 1.1.9 ===
+''Released: Oktober 29, 2022''
+
+* Code reviewed with WPThemeReview and WordPress-Core standards
+* Removed fields argument from comment_form()
+* Add 4 new filters to comment form field:
+** comment_form_field_author
+** comment_form_field_email
+** comment_form_field_url
+** comment_form_field_cookies
+
 === 1.1.8 ===
-''Released: Oktober 22, 2022
+''Released: Oktober 22, 2022''
 
 ==== Maintaining support ====
 

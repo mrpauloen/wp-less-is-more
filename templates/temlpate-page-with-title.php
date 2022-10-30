@@ -1,24 +1,30 @@
-<?php get_header();
+<?php
+
+/**
+ * Template Name: Page with title
+ * Description: This template show page with title above thumbnail. It has been created because standart (default) page template hasn't it.
+ *
+ * @since WP Less is More 1.1.1
+ */
+
+get_header();
 
 if ( have_posts() ) :
 	while ( have_posts() ) :
 		the_post();
 		?>
-
-<article id="site-content" class="text-break">
-
+<article>
+<h3 class="container single-entry-title entry-title"><?php the_title(); ?></h3>
+<hr/>
 		<?php the_post_thumbnail( 'post-thumbnail', array( 'class' => 'img-responsive' ) ); ?>
 
-<div class="clearfix"></div>
+<div class="clearfix top"></div>
 
 		<?php
-
 		the_content();
 
 		wp_link_pages(
 			array(
-				'before'      => '<p class="post-nav-links clear">' . __( 'Pages:', 'wp-less-is-more' ),
-				'after'       => '</p>',
 				'link_before' => '<button type="button" class="btn btn-xs btn-danger">',
 				'link_after'  => '</button>',
 				'separator'   => '&nbsp;&nbsp;',
@@ -27,11 +33,11 @@ if ( have_posts() ) :
 		);
 		?>
 
+<div class="clearfix"></div>
+
 <!--
 		<?php trackback_rdf(); ?>
 -->
-
-		<?php comments_template(); ?>
 
 </article>
 
@@ -43,3 +49,4 @@ if ( have_posts() ) :
 endif;
 
 get_footer();
+
